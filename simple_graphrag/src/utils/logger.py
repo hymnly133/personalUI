@@ -89,59 +89,78 @@ def setup_logging(
 ) -> None:
     """
     设置日志配置
+    
+    配置说明：
+    - 控制台：始终输出INFO级别日志
+    - 文件1 (debug)：输出DEBUG级别及以上的所有日志
+    - 文件2 (info)：输出INFO级别及以上的日志
 
     Args:
-        verbose: 是否启用详细日志，如果为None则从环境变量读取
-        log_file: 日志文件名，如果为None则使用默认名称 "graph_service.log"
+        verbose: 是否启用详细日志，如果为None则从环境变量读取（用于控制DEBUG文件日志）
+        log_file: 日志文件名前缀，如果为None则使用默认名称 "graph_service"
     """
-    # 确定是否启用详细日志
+    # 确定是否启用详细日志（用于DEBUG文件）
     if verbose is None:
         verbose_env = os.environ.get("SIMPLERAG_VERBOSE", "").lower()
         verbose = verbose_env in ("1", "true", "yes", "on")
 
-    # 设置日志级别
-    if verbose:
-        level = logging.DEBUG
-        format_str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    else:
-        level = logging.INFO
-        format_str = "%(asctime)s - %(levelname)s - %(message)s"
-
-    # 获取根日志记录器
+    # 获取根日志记录器，设置为DEBUG级别以捕获所有日志
     root_logger = logging.getLogger()
-    root_logger.setLevel(level)
+    root_logger.setLevel(logging.DEBUG)
 
     # 清除现有的处理器（避免重复添加）
     root_logger.handlers.clear()
 
-    # 创建控制台处理器
+    # ========== 1. 创建控制台处理器 (INFO级别) ==========
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(level)
-    console_formatter = logging.Formatter(format_str, datefmt="%Y-%m-%d %H:%M:%S")
+    console_handler.setLevel(logging.INFO)  # 控制台固定为INFO级别
+    console_format_str = "%(asctime)s - %(levelname)s - %(message)s"
+    console_formatter = logging.Formatter(console_format_str, datefmt="%Y-%m-%d %H:%M:%S")
     console_handler.setFormatter(console_formatter)
     root_logger.addHandler(console_handler)
 
-    # 创建文件处理器
-    if log_file is None:
-        log_file = "graph_service.log"
-
+    # 获取日志目录
     log_dir = _get_log_dir()
-    log_path = log_dir / log_file
+    
+    # 确定日志文件名前缀
+    if log_file is None:
+        log_file = "graph_service"
 
-    # 使用 RotatingFileHandler 进行日志轮转
-    # maxBytes: 10MB, backupCount: 保留5个备份文件
-    file_handler = RotatingFileHandler(
-        log_path, maxBytes=10 * 1024 * 1024, backupCount=5, encoding="utf-8"  # 10MB
+    # ========== 2. 创建DEBUG级别文件处理器 ==========
+    debug_log_path = log_dir / f"{log_file}_debug.log"
+    debug_file_handler = RotatingFileHandler(
+        debug_log_path, 
+        maxBytes=10 * 1024 * 1024,  # 10MB
+        backupCount=5, 
+        encoding="utf-8"
     )
-    file_handler.setLevel(level)
-
-    # 文件日志使用更详细的格式
-    file_format_str = (
+    debug_file_handler.setLevel(logging.DEBUG)  # DEBUG及以上级别
+    
+    # DEBUG文件使用详细格式
+    debug_format_str = (
         "%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s"
     )
-    file_formatter = logging.Formatter(file_format_str, datefmt="%Y-%m-%d %H:%M:%S")
-    file_handler.setFormatter(file_formatter)
-    root_logger.addHandler(file_handler)
+    debug_formatter = logging.Formatter(debug_format_str, datefmt="%Y-%m-%d %H:%M:%S")
+    debug_file_handler.setFormatter(debug_formatter)
+    root_logger.addHandler(debug_file_handler)
+
+    # ========== 3. 创建INFO级别文件处理器 ==========
+    info_log_path = log_dir / f"{log_file}_info.log"
+    info_file_handler = RotatingFileHandler(
+        info_log_path, 
+        maxBytes=10 * 1024 * 1024,  # 10MB
+        backupCount=5, 
+        encoding="utf-8"
+    )
+    info_file_handler.setLevel(logging.INFO)  # INFO及以上级别
+    
+    # INFO文件使用标准格式
+    info_format_str = (
+        "%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s"
+    )
+    info_formatter = logging.Formatter(info_format_str, datefmt="%Y-%m-%d %H:%M:%S")
+    info_file_handler.setFormatter(info_formatter)
+    root_logger.addHandler(info_file_handler)
 
     # 屏蔽第三方库的日志输出（设置为WARNING级别，只显示警告和错误）
     for logger_name in THIRD_PARTY_LOGGERS:

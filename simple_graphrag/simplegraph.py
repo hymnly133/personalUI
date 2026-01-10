@@ -39,6 +39,7 @@ from src.updaters.system_updater import SystemUpdater
 from src.extractors.extractor import GraphExtractor
 from src.combiners.smart_merger import SmartMerger
 from src.combiners.combiner import Combiner
+from src.search.search_engine import SearchEngine
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -146,6 +147,11 @@ class SimpleGraph:
 
         # 初始化简单合并器（用于应用增量）
         self.combiner = Combiner(self.graph, strict_validation=False)
+
+        # 初始化搜索引擎并关联到Graph
+        self.search_engine = SearchEngine(self.graph)
+        self.graph._search_engine = self.search_engine  # 让Graph持有引用
+        logger.info("搜索引擎初始化完成")
 
         # 并发控制
         self._worker_tasks: List[asyncio.Task] = []  # 提取任务的workers
@@ -1373,18 +1379,100 @@ class SimpleGraph:
             entities.append(entity)
 
         relationships = []
+        increment_count_stats = {"incremented": 0, "not_found": 0}
+
         for rel_delta in optimized_delta.relationships:
-            relationship = Relationship(
-                source=rel_delta.source,
-                target=rel_delta.target,
-                description=rel_delta.description,
-                count=rel_delta.count,
-                refer=rel_delta.refer,  # 传递 refer 字段
-            )
-            relationships.append(relationship)
+            if rel_delta.operation == "increment_count":
+                # 处理increment_count操作：查找并增加现有关系的count
+                increment_amount = rel_delta.increment_amount
+                if increment_amount <= 0:
+                    logger.warning(
+                        f"increment_count操作的increment_amount无效: {increment_amount}, "
+                        f"关系: {rel_delta.source} -> {rel_delta.target}"
+                    )
+                    continue
+
+                # 查找匹配的现有关系（source、target、description、refer都相同）
+                found = False
+                for existing_rel in self.graph.get_relationships():
+                    # 使用大小写不敏感比较
+                    source_match = (
+                        existing_rel.source.upper() == rel_delta.source.upper()
+                    )
+                    target_match = (
+                        existing_rel.target.upper() == rel_delta.target.upper()
+                    )
+                    desc_match = existing_rel.description == rel_delta.description
+                    # refer数组比较（顺序无关，大小写不敏感）
+                    refer_set_existing = set([r.upper() for r in existing_rel.refer])
+                    refer_set_delta = set([r.upper() for r in rel_delta.refer])
+                    refer_match = refer_set_existing == refer_set_delta
+
+                    if source_match and target_match and desc_match and refer_match:
+                        # 找到匹配的关系，增加其count
+                        old_count = existing_rel.count
+                        existing_rel.count += increment_amount
+
+                        # 追加语义时间到现有关系
+                        if rel_delta.semantic_times:
+                            existing_rel.semantic_times.extend(rel_delta.semantic_times)
+                            logger.info(
+                                f"increment_count: {rel_delta.source} -> {rel_delta.target}, "
+                                f"count从 {old_count} 增加到 {existing_rel.count} (+{increment_amount}), "
+                                f"追加 {len(rel_delta.semantic_times)} 个语义时间"
+                            )
+                        else:
+                            logger.info(
+                                f"increment_count: {rel_delta.source} -> {rel_delta.target}, "
+                                f"count从 {old_count} 增加到 {existing_rel.count} (+{increment_amount})"
+                            )
+
+                        found = True
+                        increment_count_stats["incremented"] += 1
+                        break
+
+                if not found:
+                    logger.warning(
+                        f"increment_count操作未找到匹配的现有关系: "
+                        f"{rel_delta.source} -> {rel_delta.target} "
+                        f"(description={rel_delta.description}, refer={rel_delta.refer}), "
+                        f"将作为新关系添加"
+                    )
+                    # 未找到匹配关系，作为新关系添加
+                    relationship = Relationship(
+                        source=rel_delta.source,
+                        target=rel_delta.target,
+                        description=rel_delta.description,
+                        count=increment_amount,  # 使用increment_amount作为初始count
+                        refer=rel_delta.refer,
+                        semantic_times=rel_delta.semantic_times,  # 传递 semantic_times 字段
+                    )
+                    relationships.append(relationship)
+                    increment_count_stats["not_found"] += 1
+            else:
+                # 其他操作：正常添加关系
+                relationship = Relationship(
+                    source=rel_delta.source,
+                    target=rel_delta.target,
+                    description=rel_delta.description,
+                    count=rel_delta.count,
+                    refer=rel_delta.refer,  # 传递 refer 字段
+                    semantic_times=rel_delta.semantic_times,  # 传递 semantic_times 字段
+                )
+                relationships.append(relationship)
 
         # 使用Combiner合并到graph
         stats = self.combiner.combine(entities, relationships)
+
+        # 添加increment_count统计
+        if (
+            increment_count_stats["incremented"] > 0
+            or increment_count_stats["not_found"] > 0
+        ):
+            logger.info(
+                f"increment_count操作统计: 成功增加 {increment_count_stats['incremented']} 个, "
+                f"未找到匹配 {increment_count_stats['not_found']} 个"
+            )
 
         logger.info(
             f"应用增量完成: 实体 +{stats['entities']['added']}/~{stats['entities']['updated']}, "
@@ -1392,3 +1480,57 @@ class SimpleGraph:
         )
 
         return stats
+
+    # ==================== 搜索功能 ====================
+
+    def search_keyword(
+        self, keyword: str, fuzzy: bool = True, limit: Optional[int] = None
+    ):
+        """
+        关键词搜索
+
+        Args:
+            keyword: 搜索关键词
+            fuzzy: 是否模糊搜索
+            limit: 结果数量限制
+
+        Returns:
+            搜索结果列表
+        """
+        return self.search_engine.search_keyword(keyword, fuzzy, limit)
+
+    def get_node_detail(self, node_id: str):
+        """
+        获取节点详情
+
+        Args:
+            node_id: 节点ID（可以是实体名、类节点ID等）
+
+        Returns:
+            节点详情对象
+        """
+        return self.search_engine.get_node_detail(node_id)
+
+    def get_entity_node_group(self, entity_name: str):
+        """
+        获取实体节点组（实体+所有类节点+一层关系）
+
+        Args:
+            entity_name: 实体名称
+
+        Returns:
+            实体节点组对象
+        """
+        return self.search_engine.get_entity_node_group(entity_name)
+
+    def get_class_node_group(self, class_name: str):
+        """
+        获取类节点组（所有该类的实体类节点）
+
+        Args:
+            class_name: 类名称
+
+        Returns:
+            类节点组对象
+        """
+        return self.search_engine.get_class_node_group(class_name)

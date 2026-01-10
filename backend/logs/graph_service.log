@@ -1,0 +1,1876 @@
+2026-01-09 23:48:58 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:48:58 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:48:58 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-09 23:48:58 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-09 23:48:58 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-09 23:48:58 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-09 23:48:59 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:417 - Graph 加载成功: 5 个实体, 0 个关系
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-09 23:48:59 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 5 个实体
+2026-01-09 23:48:59 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-09 23:48:59 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:838 - Worker 0 启动
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:838 - Worker 1 启动
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:838 - Worker 2 启动
+2026-01-09 23:48:59 - simplegraph - INFO - simplegraph.py:914 - Merge Worker 启动（串行处理）
+2026-01-09 23:49:05 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 9c16dcdb...
+2026-01-09 23:49:05 - simplegraph - INFO - simplegraph.py:848 - Worker 0 开始处理任务: 9c16dcdb...
+2026-01-09 23:49:05 - simplegraph - INFO - simplegraph.py:479 - 开始执行任务: 9c16dcdb-c212-4fdc-aa37-2c3ba042ab31
+2026-01-09 23:49:05 - simplegraph - INFO - simplegraph.py:503 - [任务 9c16dcdb] 🔧 开始System更新阶段
+2026-01-09 23:49:05 - simplegraph - INFO - simplegraph.py:504 - [任务 9c16dcdb] 输入文本: 我的微信中有这些联系人，小明，小梅，小张...
+2026-01-09 23:49:08 - simplegraph - INFO - simplegraph.py:542 - [任务 9c16dcdb] ✓ System无需更新，现有类定义已足够
+2026-01-09 23:49:08 - simplegraph - INFO - simplegraph.py:663 - [任务 9c16dcdb] 🔍 开始实体和关系提取阶段
+2026-01-09 23:49:21 - simplegraph - INFO - simplegraph.py:1276 - 开始检查和优化提取结果（异步）...
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:1281 - 检查优化完成
+2026-01-09 23:49:40 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 5 个实体, 14 个关系
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:1245 - 提取完成: 5 个实体, 14 个关系
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:677 - [任务 9c16dcdb] ✅ 提取完成:
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:678 -   📦 提取到 5 个实体:
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:681 -      • 我 [用户]
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:682 -        描述: 用户本人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:681 -      • 微信 [可启动应用, 交流平台]
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:682 -        描述: 一个即时通讯应用
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:681 -      • 小明 [可联系人]
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:682 -        描述: 一个具体的人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:681 -      • 小梅 [可联系人]
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:682 -        描述: 一个具体的人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:681 -      • 小张 [可联系人]
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:682 -        描述: 一个具体的人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:693 -   🔗 提取到 14 个关系:
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 微信:可启动应用
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我拥有微信
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 微信:交流平台
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我使用微信进行交流
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小明:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我认识小明
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小梅:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我认识小梅
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小张:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我认识小张
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小明:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        微信中有小明
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小梅:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        微信中有小梅
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小张:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        微信中有小张
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小明:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小明
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小梅:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小梅
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 微信:交流平台 → 小张:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小张
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小明:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小明
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小梅:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小梅
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:696 -      • 我 → 小张:可联系人
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:697 -        我的微信中有小张
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:821 - 任务执行完成: GraphDelta(task_id=9c16dcdb-c212-4fdc-aa37-2c3ba042ab31, 0 classes, 5 entities, 14 relationships)
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:875 - Worker 0 提取完成，任务进入合并队列: 9c16dcdb...
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:924 - Merge Worker 开始合并任务: 9c16dcdb...
+2026-01-09 23:49:40 - simplegraph - INFO - simplegraph.py:990 - 开始智能合并任务结果: 9c16dcdb...
+2026-01-09 23:49:40 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=9c16dcdb-c212-4fdc-aa37-2c3ba042ab31, 0 classes, 5 entities, 14 relationships)
+2026-01-09 23:49:40 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-09 23:50:26 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 1 optimized
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:1022 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 1 optimized
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 5 个实体到图
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 2 个, 失败 0 个
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 14 个关系到图
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 14 个, 更新 0 个, 失败 0 个
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 8 个实体, 14 个关系
+2026-01-09 23:50:26 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:1383 - 应用增量完成: 实体 +3/~2, 关系 +14/~0
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:1027 - 任务结果已合并到主图谱: 9c16dcdb...
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:950 - Merge Worker 任务合并完成: 9c16dcdb...
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:161 - 任务 9c16dcdb 完成，开始自动保存数据库...
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 5, 'relationships': 0}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 5, 'relationships': 14}
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:50:26 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 5, 'relationships': 0}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-09 23:50:26 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:52:20 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:52:20 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-09 23:52:20 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:900 - Worker 2 被取消
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:905 - Worker 2 停止
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:900 - Worker 0 被取消
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:905 - Worker 0 停止
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:900 - Worker 1 被取消
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:905 - Worker 1 停止
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:972 - Merge Worker 被取消
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:977 - Merge Worker 停止
+2026-01-09 23:52:20 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:07:14 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:07:14 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:07:14 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:07:14 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:07:14 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:07:14 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:07:16 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 5 个实体, 0 个关系
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:07:16 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 5 个实体
+2026-01-10 00:07:16 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:07:16 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:07:16 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 00:07:44 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: e4c93a1c...
+2026-01-10 00:07:44 - simplegraph - INFO - simplegraph.py:854 - Worker 2 开始处理任务: e4c93a1c...
+2026-01-10 00:07:44 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: e4c93a1c-6164-48db-89af-fa9dcca743c4
+2026-01-10 00:07:44 - simplegraph - INFO - simplegraph.py:509 - [任务 e4c93a1c] 🔧 开始System更新阶段
+2026-01-10 00:07:44 - simplegraph - INFO - simplegraph.py:510 - [任务 e4c93a1c] 输入文本: 我的微信中有这些联系人，小明，小梅，小张...
+2026-01-10 00:07:52 - simplegraph - INFO - simplegraph.py:548 - [任务 e4c93a1c] ✓ System无需更新，现有类定义已足够
+2026-01-10 00:07:52 - simplegraph - INFO - simplegraph.py:669 - [任务 e4c93a1c] 🔍 开始实体和关系提取阶段
+2026-01-10 00:08:34 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 00:09:12 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 5 个实体, 8 个关系
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 5 个实体, 8 个关系
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:683 - [任务 e4c93a1c] ✅ 提取完成:
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 5 个实体:
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:687 -      • 我 [用户]
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:687 -      • 微信 [可启动应用, 交流平台]
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个即时通讯应用
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:687 -      • 小明 [可联系人]
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个具体的人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:687 -      • 小梅 [可联系人]
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个具体的人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:687 -      • 小张 [可联系人]
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个具体的人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 8 个关系:
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信:可启动应用
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        我拥有微信
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信:交流平台
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        我拥有微信
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小明:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        我拥有联系人小明
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小梅:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        我拥有联系人小梅
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小张:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        我拥有联系人小张
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 微信:交流平台 → 小明:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        微信中包含联系人小明
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 微信:交流平台 → 小梅:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        微信中包含联系人小梅
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:702 -      • 微信:交流平台 → 小张:可联系人
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:703 -        微信中包含联系人小张
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=e4c93a1c-6164-48db-89af-fa9dcca743c4, 0 classes, 5 entities, 8 relationships)
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:881 - Worker 2 提取完成，任务进入合并队列: e4c93a1c...
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: e4c93a1c...
+2026-01-10 00:09:12 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: e4c93a1c...
+2026-01-10 00:09:12 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=e4c93a1c-6164-48db-89af-fa9dcca743c4, 0 classes, 5 entities, 8 relationships)
+2026-01-10 00:09:12 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 00:09:48 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 1 optimized
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 1 optimized
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 5 个实体到图
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 2 个, 失败 0 个
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 8 个关系到图
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 8 个, 更新 0 个, 失败 0 个
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 8 个实体, 8 个关系
+2026-01-10 00:09:48 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +3/~2, 关系 +8/~0
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: e4c93a1c...
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: e4c93a1c...
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:161 - 任务 e4c93a1c 完成，开始自动保存数据库...
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 5, 'relationships': 8}
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:09:48 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:09:48 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:31 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 2c9ede87...
+2026-01-10 00:13:31 - simplegraph - INFO - simplegraph.py:854 - Worker 0 开始处理任务: 2c9ede87...
+2026-01-10 00:13:31 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 2c9ede87-f5aa-4f4d-91f2-ec8563673628
+2026-01-10 00:13:31 - simplegraph - INFO - simplegraph.py:509 - [任务 2c9ede87] 🔧 开始System更新阶段
+2026-01-10 00:13:31 - simplegraph - INFO - simplegraph.py:510 - [任务 2c9ede87] 输入文本: 小梅...
+2026-01-10 00:13:38 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:38 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:38 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:831 - 任务被取消: 2c9ede87-f5aa-4f4d-91f2-ec8563673628
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:890 - Worker 0 任务被取消: 2c9ede87...
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 00:13:38 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:13:41 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:41 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:13:41 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:13:41 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:13:41 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:13:41 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:13:42 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 8 个实体, 8 个关系
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:13:42 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 8 个实体
+2026-01-10 00:13:42 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:13:42 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:13:42 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 00:14:24 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: b9a38be5...
+2026-01-10 00:14:24 - simplegraph - INFO - simplegraph.py:854 - Worker 1 开始处理任务: b9a38be5...
+2026-01-10 00:14:24 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: b9a38be5-a1c8-43e6-ba46-2230b547f0a8
+2026-01-10 00:14:24 - simplegraph - INFO - simplegraph.py:509 - [任务 b9a38be5] 🔧 开始System更新阶段
+2026-01-10 00:14:24 - simplegraph - INFO - simplegraph.py:510 - [任务 b9a38be5] 输入文本: 聊天记录显示：小梅说自己喜欢最近新上架的布娃娃...
+2026-01-10 00:15:34 - simplegraph - INFO - simplegraph.py:548 - [任务 b9a38be5] ✓ System无需更新，现有类定义已足够
+2026-01-10 00:15:34 - simplegraph - INFO - simplegraph.py:669 - [任务 b9a38be5] 🔍 开始实体和关系提取阶段
+2026-01-10 00:15:46 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 00:16:18 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 4 个实体, 4 个关系
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 4 个实体, 4 个关系
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:683 - [任务 b9a38be5] ✅ 提取完成:
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 4 个实体:
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:687 -      • 我 [用户]
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:687 -      • 小梅 [可联系人]
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个具体的人
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:687 -      • 最近新上架的布娃娃 [商品]
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:688 -        描述: 一款新上架的布娃娃商品
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:697 -        属性: 类型=布娃娃
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:687 -      • 聊天记录 [信息记录]
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户之间的对话记录
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 4 个关系:
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 聊天记录:信息记录
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:703 -        我查看了显示某内容的聊天记录
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:702 -      • 聊天记录:信息记录 → 小梅:可联系人
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:703 -        聊天记录中包含小梅的发言
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:702 -      • 小梅:可联系人 → 最近新上架的布娃娃:商品
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:703 -        小梅表示喜欢该布娃娃
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:702 -      • 聊天记录:信息记录 → 小梅:可联系人
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:703 -        聊天记录显示小梅喜欢某物
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=b9a38be5-a1c8-43e6-ba46-2230b547f0a8, 0 classes, 4 entities, 4 relationships)
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:881 - Worker 1 提取完成，任务进入合并队列: b9a38be5...
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: b9a38be5...
+2026-01-10 00:16:18 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: b9a38be5...
+2026-01-10 00:16:18 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=b9a38be5-a1c8-43e6-ba46-2230b547f0a8, 0 classes, 4 entities, 4 relationships)
+2026-01-10 00:16:18 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 00:16:47 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 2 duplicates, 0 conflicts, 0 aligned, 1 optimized
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 2 duplicates, 0 conflicts, 0 aligned, 1 optimized
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 4 个实体到图
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 2 个, 更新 2 个, 失败 0 个
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 4 个关系到图
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 4 个, 更新 0 个, 失败 0 个
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 10 个实体, 12 个关系
+2026-01-10 00:16:47 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +2/~2, 关系 +4/~0
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: b9a38be5...
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: b9a38be5...
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:161 - 任务 b9a38be5 完成，开始自动保存数据库...
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 10, 'relationships': 12}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 4, 'relationships': 4}
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:16:47 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 10, 'relationships': 12}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:16:47 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:50 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:50 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:50 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 00:47:50 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:47:53 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:53 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:47:53 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:47:53 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:47:53 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:47:53 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:47:55 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 10 个实体, 12 个关系
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:47:55 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 10 个实体
+2026-01-10 00:47:55 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:47:55 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:47:55 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 00:48:04 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:48:04 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:48:04 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 00:48:04 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:48:29 - graph_service - INFO - graph_service.py:66 - 创建新的空数据库...
+2026-01-10 00:48:29 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:48:29 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:48:29 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:48:29 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:48:31 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:48:31 - graph_service - INFO - graph_service.py:74 - 新数据库创建完成
+2026-01-10 00:48:31 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:48:31 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:48:31 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 00:49:24 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: c185481e...
+2026-01-10 00:49:24 - simplegraph - INFO - simplegraph.py:854 - Worker 1 开始处理任务: c185481e...
+2026-01-10 00:49:24 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: c185481e-7767-4168-91df-ecf98fe77d7c
+2026-01-10 00:49:24 - simplegraph - INFO - simplegraph.py:509 - [任务 c185481e] 🔧 开始System更新阶段
+2026-01-10 00:49:24 - simplegraph - INFO - simplegraph.py:510 - [任务 c185481e] 输入文本: 我的微信中有这些联系人，小明，小梅，小张...
+2026-01-10 00:49:30 - simplegraph - INFO - simplegraph.py:548 - [任务 c185481e] ✓ System无需更新，现有类定义已足够
+2026-01-10 00:49:30 - simplegraph - INFO - simplegraph.py:669 - [任务 c185481e] 🔍 开始实体和关系提取阶段
+2026-01-10 00:49:42 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 00:50:27 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 5 个实体, 9 个关系
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 5 个实体, 9 个关系
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:683 - [任务 c185481e] ✅ 提取完成:
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 5 个实体:
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:687 -      • 用户本人 [用户]
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:688 -        描述: 正在操作微信的用户，是微信账号的所有者
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:687 -      • 微信应用 [可启动应用, 交流平台]
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:688 -        描述: 腾讯公司开发的即时通讯和社交应用，用户本人手机中安装的版本
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:687 -      • 联系人小明 [可联系人]
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人在微信通讯录中的联系人，姓名为小明
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:687 -      • 联系人小梅 [可联系人]
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人在微信通讯录中的联系人，姓名为小梅
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:687 -      • 联系人小张 [可联系人]
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人在微信通讯录中的联系人，姓名为小张
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 9 个关系:
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 微信应用:可启动应用
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我使用微信
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 联系人小明:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我联系小明
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 联系人小梅:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我联系小梅
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 联系人小张:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我联系小张
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 微信应用:交流平台
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我的微信
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 微信应用:交流平台 → 联系人小明:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        微信中有小明
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 微信应用:交流平台 → 联系人小梅:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        微信中有小梅
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 微信应用:交流平台 → 联系人小张:可联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        微信中有小张
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:702 -      • 用户本人 → 微信应用:交流平台
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:703 -        我的微信中有这些联系人
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=c185481e-7767-4168-91df-ecf98fe77d7c, 0 classes, 5 entities, 9 relationships)
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:881 - Worker 1 提取完成，任务进入合并队列: c185481e...
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: c185481e...
+2026-01-10 00:50:27 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: c185481e...
+2026-01-10 00:50:27 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=c185481e-7767-4168-91df-ecf98fe77d7c, 0 classes, 5 entities, 9 relationships)
+2026-01-10 00:50:27 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 00:51:08 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 2 duplicates, 0 conflicts, 5 aligned, 2 optimized
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 2 duplicates, 0 conflicts, 5 aligned, 2 optimized
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 5 个实体到图
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 2 个, 失败 0 个
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 9 个关系到图
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 9 个, 更新 0 个, 失败 0 个
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 8 个实体, 9 个关系
+2026-01-10 00:51:08 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +3/~2, 关系 +9/~0
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: c185481e...
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: c185481e...
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:161 - 任务 c185481e 完成，开始自动保存数据库...
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 9}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 5, 'relationships': 9}
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:51:08 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 9}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:51:08 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:51:23 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: ef6e5494...
+2026-01-10 00:51:23 - simplegraph - INFO - simplegraph.py:854 - Worker 2 开始处理任务: ef6e5494...
+2026-01-10 00:51:23 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: ef6e5494-99fc-41a2-8862-777fdceba146
+2026-01-10 00:51:23 - simplegraph - INFO - simplegraph.py:509 - [任务 ef6e5494] 🔧 开始System更新阶段
+2026-01-10 00:51:23 - simplegraph - INFO - simplegraph.py:510 - [任务 ef6e5494] 输入文本: 小梅说最近喜欢吃麻辣烫和火锅...
+2026-01-10 00:51:26 - simplegraph - INFO - simplegraph.py:548 - [任务 ef6e5494] ✓ System无需更新，现有类定义已足够
+2026-01-10 00:51:26 - simplegraph - INFO - simplegraph.py:669 - [任务 ef6e5494] 🔍 开始实体和关系提取阶段
+2026-01-10 00:51:33 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 00:52:21 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 3 个实体, 4 个关系
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 3 个实体, 4 个关系
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:683 - [任务 ef6e5494] ✅ 提取完成:
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 3 个实体:
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:687 -      • 小梅 [可联系人]
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个具体的人，是当前对话中信息的陈述者
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:687 -      • 麻辣烫 [商品]
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:688 -        描述: 一种流行的中式街头小吃，通常由各种食材在麻辣汤底中烫煮而成
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:687 -      • 火锅 [商品]
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:688 -        描述: 一种中式餐饮方式，食客围坐在煮有汤底的锅旁，自行涮煮食材
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 4 个关系:
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:702 -      • 小梅 → 麻辣烫:商品
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:703 -        小梅喜欢吃麻辣烫
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:702 -      • 小梅 → 火锅:商品
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:703 -        小梅喜欢吃火锅
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:702 -      • 小梅 → 我
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:703 -        小梅对我说
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:702 -      • 小梅 → 我
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:703 -        小梅说最近喜欢吃麻辣烫和火锅
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=ef6e5494-99fc-41a2-8862-777fdceba146, 0 classes, 3 entities, 4 relationships)
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:881 - Worker 2 提取完成，任务进入合并队列: ef6e5494...
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: ef6e5494...
+2026-01-10 00:52:21 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: ef6e5494...
+2026-01-10 00:52:21 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=ef6e5494-99fc-41a2-8862-777fdceba146, 0 classes, 3 entities, 4 relationships)
+2026-01-10 00:52:21 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 00:52:45 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 1 duplicates, 1 conflicts, 0 aligned, 2 optimized
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 1 duplicates, 1 conflicts, 0 aligned, 2 optimized
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 3 个实体到图
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 2 个, 更新 1 个, 失败 0 个
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 4 个关系到图
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 4 个, 更新 0 个, 失败 0 个
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 10 个实体, 13 个关系
+2026-01-10 00:52:45 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +2/~1, 关系 +4/~0
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: ef6e5494...
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: ef6e5494...
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:161 - 任务 ef6e5494 完成，开始自动保存数据库...
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 10, 'relationships': 13}, 'tasks': {'total': 2, 'by_status': {'pending': 0, 'running': 0, 'completed': 2, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 3, 'relationships': 4}
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:52:45 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 10, 'relationships': 13}, 'tasks': {'total': 2, 'by_status': {'pending': 0, 'running': 0, 'completed': 2, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:52:45 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:53:37 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 94224a86...
+2026-01-10 00:53:37 - simplegraph - INFO - simplegraph.py:854 - Worker 0 开始处理任务: 94224a86...
+2026-01-10 00:53:37 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 94224a86-c1a1-4bfd-8193-26172b74ea90
+2026-01-10 00:53:37 - simplegraph - INFO - simplegraph.py:509 - [任务 94224a86] 🔧 开始System更新阶段
+2026-01-10 00:53:37 - simplegraph - INFO - simplegraph.py:510 - [任务 94224a86] 输入文本: 我习惯在大众点评中查看餐厅的评价...
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 1 个类
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 0 个类, 增强 1 个类
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:1112 -   新增类: []
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:1113 -   增强类: ['商家']
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:527 - [任务 94224a86] ✅ System更新完成:
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:541 -   🔧 增强类: 商家
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:542 -      描述: 现实或者网络中的具体可消费的商家，如餐厅、超市、电影院、咖啡厅等，或者某个网络店铺，如某某品牌旗舰店
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:544 -      属性: 类型, 评价平台
+2026-01-10 00:53:48 - simplegraph - INFO - simplegraph.py:669 - [任务 94224a86] 🔍 开始实体和关系提取阶段
+2026-01-10 00:53:58 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 00:54:40 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 4 个实体, 10 个关系
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 4 个实体, 10 个关系
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:683 - [任务 94224a86] ✅ 提取完成:
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 4 个实体:
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:687 -      • 我 [用户]
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人，即当前陈述者
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:687 -      • 大众点评 [可启动应用, 内容平台]
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:688 -        描述: 一个提供本地生活服务信息、用户评价和商户推荐的内容与消费决策平台
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:687 -      • 我关注的餐厅 [商家]
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户本人在大众点评平台上浏览或收藏的某个或某类餐饮服务场所
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:697 -        属性: 类型=餐厅, 评价平台=大众点评
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:687 -      • 餐厅的评价 [用户评价]
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:688 -        描述: 附着于特定餐厅商家下的，由其他用户发布的关于菜品、服务、环境等方面的反馈与评分信息
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:697 -        属性: 所属平台=大众点评, 评价对象=我关注的餐厅
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 10 个关系:
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 大众点评:可启动应用
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我打开大众点评
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 大众点评
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我习惯使用大众点评
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 我关注的餐厅:商家
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我查看餐厅的信息
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 餐厅的评价:用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我查看评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 大众点评:内容平台 → 我关注的餐厅:商家
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        大众点评上展示餐厅信息
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 大众点评:内容平台 → 餐厅的评价:用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        大众点评承载用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我关注的餐厅:商家 → 餐厅的评价:用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        餐厅拥有用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 餐厅的评价:用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我习惯在大众点评中查看餐厅的评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 大众点评:内容平台 → 餐厅的评价:用户评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我通过大众点评查看餐厅的评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 我关注的餐厅:商家
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:703 -        我通过大众点评查看该餐厅的评价
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=94224a86-c1a1-4bfd-8193-26172b74ea90, 1 classes, 4 entities, 10 relationships)
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:881 - Worker 0 提取完成，任务进入合并队列: 94224a86...
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: 94224a86...
+2026-01-10 00:54:40 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: 94224a86...
+2026-01-10 00:54:40 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=94224a86-c1a1-4bfd-8193-26172b74ea90, 1 classes, 4 entities, 10 relationships)
+2026-01-10 00:54:40 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 00:55:32 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 1 duplicates, 1 conflicts, 1 aligned, 2 optimized
+2026-01-10 00:55:32 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 1 duplicates, 1 conflicts, 1 aligned, 2 optimized
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 4 个实体到图
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 1 个, 失败 0 个
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 10 个关系到图
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 10 个, 更新 0 个, 失败 0 个
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 13 个实体, 23 个关系
+2026-01-10 00:55:32 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 00:55:32 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +3/~1, 关系 +10/~0
+2026-01-10 00:55:32 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: 94224a86...
+2026-01-10 00:55:32 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: 94224a86...
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:161 - 任务 94224a86 完成，开始自动保存数据库...
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 13, 'relationships': 23}, 'tasks': {'total': 3, 'by_status': {'pending': 0, 'running': 0, 'completed': 3, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 1, 'entities': 4, 'relationships': 10}
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:55:33 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:55:33 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 13, 'relationships': 23}, 'tasks': {'total': 3, 'by_status': {'pending': 0, 'running': 0, 'completed': 3, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 00:55:33 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:09 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:09 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:09 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 00:57:09 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:57:11 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:11 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:11 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:57:11 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:57:11 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:57:11 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:57:13 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 13 个实体, 23 个关系
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:57:13 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 13 个实体
+2026-01-10 00:57:13 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:57:13 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:57:13 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 00:57:22 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:22 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 00:57:22 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 00:57:22 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 00:57:28 - graph_service - INFO - graph_service.py:66 - 创建新的空数据库...
+2026-01-10 00:57:28 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 00:57:28 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 00:57:28 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 00:57:28 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 00:57:30 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 00:57:30 - graph_service - INFO - graph_service.py:74 - 新数据库创建完成
+2026-01-10 00:57:30 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 00:57:30 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 00:57:30 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 01:15:53 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 477c4580...
+2026-01-10 01:15:53 - simplegraph - INFO - simplegraph.py:854 - Worker 1 开始处理任务: 477c4580...
+2026-01-10 01:15:53 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 477c4580-b562-4d9c-8141-363f45fcb253
+2026-01-10 01:15:53 - simplegraph - INFO - simplegraph.py:509 - [任务 477c4580] 🔧 开始System更新阶段
+2026-01-10 01:15:53 - simplegraph - INFO - simplegraph.py:510 - [任务 477c4580] 输入文本: 我在主屏幕上滑动找到并点击了“美团”应用图标，打开美团应用。
+
+在美团首页，我点击底部导航栏的“我的”按钮，进入个人中心页面。
+
+在个人中心页面，我点击“我的订单”选项，进入历史订单列表。
+
+在订单列...
+2026-01-10 01:15:58 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 0385176d...
+2026-01-10 01:15:59 - simplegraph - INFO - simplegraph.py:854 - Worker 0 开始处理任务: 0385176d...
+2026-01-10 01:15:59 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 0385176d-6d5a-40d5-8625-03ef25ff5165
+2026-01-10 01:15:59 - simplegraph - INFO - simplegraph.py:509 - [任务 0385176d] 🔧 开始System更新阶段
+2026-01-10 01:15:59 - simplegraph - INFO - simplegraph.py:510 - [任务 0385176d] 输入文本: 在首页顶部，我点击搜索框，输入关键词“附近餐厅”，然后点击搜索按钮。
+
+在搜索结果页面，我看到列表第一条显示为“张三的店”，右侧标有评分“4.8星”。
+
+我点击“张三的店”的条目，进入店铺详情页，页面...
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 4 个类
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 3 个类, 增强 1 个类
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:1112 -   新增类: ['订单', '菜品', '外卖平台']
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:1113 -   增强类: ['商家']
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:527 - [任务 477c4580] ✅ System更新完成:
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 订单
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:532 -      描述: 用户在平台（如购物平台、外卖平台）上完成交易后产生的记录
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:534 -      属性: 订单编号, 下单时间, 订单状态, 关联商家, 订单内容, 所属平台
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 菜品
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:532 -      描述: 商家提供的可供点餐的食品或饮料项目
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:534 -      属性: 名称, 描述, 所属商家
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 外卖平台
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:532 -      描述: 专门提供在线点餐和外卖配送服务的平台
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:534 -      属性: 平台名称
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:541 -   🔧 增强类: 商家
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:542 -      描述: 现实或者网络中的具体可消费的商家，如餐厅、超市、电影院、咖啡厅等，或者某个网络店铺，如某某品牌旗舰店
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:544 -      属性: 类型, 商家名称
+2026-01-10 01:16:09 - simplegraph - INFO - simplegraph.py:669 - [任务 477c4580] 🔍 开始实体和关系提取阶段
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 4 个类
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 3 个类, 增强 1 个类
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:1112 -   新增类: ['搜索操作', '搜索结果', '评分']
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:1113 -   增强类: ['商家']
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:527 - [任务 0385176d] ✅ System更新完成:
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 搜索操作
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:532 -      描述: 用户在平台或应用内进行的搜索行为，包含搜索关键词和操作对象
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:534 -      属性: 关键词, 操作平台
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 搜索结果
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:532 -      描述: 搜索操作后返回的结果列表或条目
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:534 -      属性: 排名, 对应实体
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 评分
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:532 -      描述: 对某个实体（如商家、商品）的量化评价，通常以分数、星级等形式表示
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:534 -      属性: 分值, 评分对象
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:541 -   🔧 增强类: 商家
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:542 -      描述: 现实或者网络中的具体可消费的商家，如餐厅、超市、电影院、咖啡厅等，或者某个网络店铺，如某某品牌旗舰店
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:544 -      属性: 类型, 评分
+2026-01-10 01:16:14 - simplegraph - INFO - simplegraph.py:669 - [任务 0385176d] 🔍 开始实体和关系提取阶段
+2026-01-10 01:16:37 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:16:45 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:16:54 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: ee1588e3...
+2026-01-10 01:16:54 - simplegraph - INFO - simplegraph.py:854 - Worker 2 开始处理任务: ee1588e3...
+2026-01-10 01:16:54 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: ee1588e3-104e-444c-933a-dc0918b8e7ca
+2026-01-10 01:16:54 - simplegraph - INFO - simplegraph.py:509 - [任务 ee1588e3] 🔧 开始System更新阶段
+2026-01-10 01:16:54 - simplegraph - INFO - simplegraph.py:510 - [任务 ee1588e3] 输入文本: 在微信聊天列表页面，我点击了一个备注名显示为“小梅”的聊天条目。...
+2026-01-10 01:16:58 - simplegraph - INFO - simplegraph.py:548 - [任务 ee1588e3] ✓ System无需更新，现有类定义已足够
+2026-01-10 01:16:58 - simplegraph - INFO - simplegraph.py:669 - [任务 ee1588e3] 🔍 开始实体和关系提取阶段
+2026-01-10 01:17:16 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 01:18:05 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 5 个实体, 8 个关系
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 5 个实体, 8 个关系
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:683 - [任务 ee1588e3] ✅ 提取完成:
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 5 个实体:
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:687 -      • 我 [用户]
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:688 -        描述: 执行此次微信操作的用户本人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:687 -      • 微信 [交流平台, 可启动应用]
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:688 -        描述: 一款由腾讯公司开发的即时通讯与社交应用
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:687 -      • 小梅 [可联系人]
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:688 -        描述: 用户微信通讯录中一位备注名为“小梅”的联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:687 -      • 微信聊天列表页面 [信息记录]
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:688 -        描述: 微信应用主界面中展示所有最近聊天对话的列表视图
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:687 -      • 小梅的聊天列表条目 [信息记录]
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:688 -        描述: 微信聊天列表页面中，对应联系人“小梅”的特定一行，显示其备注名和最后一条消息预览
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 8 个关系:
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信:可启动应用
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        我打开了微信应用
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信聊天列表页面:信息记录
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        我进入了微信的聊天列表页面
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小梅的聊天列表条目:信息记录
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        我在聊天列表页面点击了小梅的聊天条目
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 微信:交流平台 → 小梅:可联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        微信上有小梅这个联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 微信聊天列表页面:信息记录 → 小梅的聊天列表条目:信息记录
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        聊天列表页面包含小梅的聊天条目
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 小梅的聊天列表条目:信息记录 → 小梅:可联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        该聊天条目对应小梅这个联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小梅:可联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        我意图联系小梅
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 小梅:可联系人
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:703 -        我通过点击小梅的聊天列表条目来联系她
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=ee1588e3-104e-444c-933a-dc0918b8e7ca, 0 classes, 5 entities, 8 relationships)
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:881 - Worker 2 提取完成，任务进入合并队列: ee1588e3...
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: ee1588e3...
+2026-01-10 01:18:05 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: ee1588e3...
+2026-01-10 01:18:05 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=ee1588e3-104e-444c-933a-dc0918b8e7ca, 0 classes, 5 entities, 8 relationships)
+2026-01-10 01:18:05 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 01:18:46 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 2 optimized
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 2 duplicates, 1 conflicts, 0 aligned, 2 optimized
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 5 个实体到图
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 2 个, 失败 0 个
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 8 个关系到图
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 8 个, 更新 0 个, 失败 0 个
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 8 个实体, 8 个关系
+2026-01-10 01:18:46 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +3/~2, 关系 +8/~0
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: ee1588e3...
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: ee1588e3...
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:161 - 任务 ee1588e3 完成，开始自动保存数据库...
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 3, 'by_status': {'pending': 0, 'running': 2, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 0, 'entities': 5, 'relationships': 8}
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:18:46 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 13, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 3, 'by_status': {'pending': 0, 'running': 2, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:18:46 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:20:43 - src.llm.client - ERROR - client.py:235 - LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2026-01-10 01:20:43 - simplegraph - ERROR - simplegraph.py:834 - 任务执行失败: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:20:43 - simplegraph - ERROR - simplegraph.py:897 - Worker 0 任务失败: 0385176d..., 错误: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 864, in _worker
+    delta = await self._run_task(task)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:20:51 - src.llm.client - ERROR - client.py:235 - LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2026-01-10 01:20:51 - simplegraph - ERROR - simplegraph.py:834 - 任务执行失败: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:20:51 - simplegraph - ERROR - simplegraph.py:897 - Worker 1 任务失败: 477c4580..., 错误: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 864, in _worker
+    delta = await self._run_task(task)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:20:58 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 3e45f972...
+2026-01-10 01:20:58 - simplegraph - INFO - simplegraph.py:854 - Worker 1 开始处理任务: 3e45f972...
+2026-01-10 01:20:58 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 3e45f972-1f60-48f9-81d1-d5c416f5171d
+2026-01-10 01:20:58 - simplegraph - INFO - simplegraph.py:509 - [任务 3e45f972] 🔧 开始System更新阶段
+2026-01-10 01:20:58 - simplegraph - INFO - simplegraph.py:510 - [任务 3e45f972] 输入文本: 我在主屏幕上滑动找到并点击了“美团”应用图标，打开美团应用。 在美团首页，我点击底部导航栏的“我的”按钮，进入个人中心页面。 在个人中心页面，我点击“我的订单”选项，进入历史订单列表。 在订单列表中，...
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 1 个类
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 1 个类, 增强 0 个类
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:1112 -   新增类: ['订单']
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:1113 -   增强类: []
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:527 - [任务 3e45f972] ✅ System更新完成:
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 订单
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:532 -      描述: 用户在平台（如购物、外卖平台）上完成交易后产生的记录
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:534 -      属性: 订单编号, 下单时间, 订单状态, 关联商家, 订单详情, 所属平台
+2026-01-10 01:21:07 - simplegraph - INFO - simplegraph.py:669 - [任务 3e45f972] 🔍 开始实体和关系提取阶段
+2026-01-10 01:21:42 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:25:47 - src.llm.client - ERROR - client.py:235 - LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+2026-01-10 01:25:47 - simplegraph - ERROR - simplegraph.py:834 - 任务执行失败: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:25:47 - simplegraph - ERROR - simplegraph.py:897 - Worker 1 任务失败: 3e45f972..., 错误: LLM异步调用失败: Connection error.
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http_proxy.py", line 343, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1532, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\ProgramData\anaconda3\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 219, in chat_completion_async
+    response = await self.async_client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2678, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1797, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\.venv\Lib\site-packages\openai\_base_client.py", line 1564, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 864, in _worker
+    delta = await self._run_task(task)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 678, in _run_task
+    entities, relationships, extraction_llm_response = await self._step_extract(
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1247, in _step_extract
+    entities, relationships, llm_response = await self._extract_async(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1283, in _extract_async
+    checked_response = await self._check_extraction_async(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\simplegraph.py", line 1304, in _check_extraction_async
+    response = await self.llm_client.extract_text_async(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 273, in extract_text_async
+    response = await self.chat_completion_async(messages, temperature=temperature)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\src\llm\client.py", line 236, in chat_completion_async
+    raise RuntimeError(f"LLM异步调用失败: {str(e)}")
+RuntimeError: LLM异步调用失败: Connection error.
+2026-01-10 01:32:47 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:47 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:47 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 01:32:47 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 01:32:49 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:49 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:32:49 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 01:32:49 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 01:32:49 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 01:32:49 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 01:32:50 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 8 个实体, 8 个关系
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 01:32:50 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 8 个实体
+2026-01-10 01:32:50 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 01:32:50 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 01:32:50 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 01:33:14 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 82403077...
+2026-01-10 01:33:14 - simplegraph - INFO - simplegraph.py:854 - Worker 0 开始处理任务: 82403077...
+2026-01-10 01:33:14 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 82403077-ddd2-44a3-b519-5f53bdee1607
+2026-01-10 01:33:14 - simplegraph - INFO - simplegraph.py:509 - [任务 82403077] 🔧 开始System更新阶段
+2026-01-10 01:33:14 - simplegraph - INFO - simplegraph.py:510 - [任务 82403077] 输入文本:     "detailed_actions": [
+      {
+        "time": "2026-01-10T00:49:57.478000Z",
+        "action": "...
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 3 个类
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 3 个类, 增强 0 个类
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:1112 -   新增类: ['平台功能界面', '分享操作', '外卖服务']
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:1113 -   增强类: []
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:527 - [任务 82403077] ✅ System更新完成:
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 平台功能界面
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:532 -      描述: 特定平台或应用内部的具体功能界面或页面
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:534 -      属性: 所属平台, 功能类型
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 分享操作
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:532 -      描述: 用户将某个实体（如内容、商家、商品等）信息分享给他人的行为
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:534 -      属性: 分享内容, 分享目标, 分享来源
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 外卖服务
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:532 -      描述: 提供在线点餐和配送服务的平台或商家服务
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:534 -      属性: 服务提供方
+2026-01-10 01:33:25 - simplegraph - INFO - simplegraph.py:669 - [任务 82403077] 🔍 开始实体和关系提取阶段
+2026-01-10 01:34:07 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:35:29 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 01:35:29 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: 好的，作为知识图谱质量检查专家，我将对第一次提取结果进行详细检查，并输出优化后的完整结果。
+
+---
+
+## 🔍 质量检查报告与优化说明
+
+### 【Priority 0】🚨 实体唯一性与具体性检查
+
+2026-01-10 01:35:29 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: ` 来概括，但结构不清晰，且遗漏了“分享操作”这个关键节点。
+2. 第三方参与关系：分享事件涉及“我”、“美团外卖”、“蔓味轻食餐厅”、“微信”和“微信好友（隐含）”，是一个典型的多方参与复杂事件，需
+2026-01-10 01:35:29 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖|提供外卖订购服务的移动应用平台)
+2026-01-10 01:35:29 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|蔓味轻食·沙拉·健康餐|一家在美团外卖平台上提供轻食沙拉的餐厅)
+2026-01-10 01:35:29 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|微信|提供即时通讯、社交等服务的移动应用)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖首页|美团外卖应用启动后的主界面，是外卖服务的总入口)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖搜索引导页|美团外卖应用中引导用户进行搜索的界面)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖全局搜索界面|美团外卖应用中提供全平台内容搜索的功能界面)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖-蔓味轻食餐厅详情页|美团外卖应用中展示“蔓味轻食·沙拉·健康餐”具体信息、菜单的页面)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|美团外卖上蔓味轻食·沙拉·健康餐的详情页信息|在2026-01-10T00:50:09时刻，于美团外卖详情页中看到的关于该餐厅的具体内容)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|我通过美团外卖分享蔓味轻食餐厅给微信好友的操作|发生在2026-01-10T00:50:13至00:50:24期间，从美团外卖发起，指向微信的分享行为实例)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|微信聊天选择界面|微信应用中用于选择聊天对象或群组的界面)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|微信聊天会话|微信中与特定联系人或群组进行通讯的对话界面)
+2026-01-10 01:35:30 - src.extractors.extractor - WARNING - extractor.py:290 - 解析实体失败: (“entity”|微信中发送的蔓味轻食餐厅分享卡片|在2026-01-10T00:50:24，通过微信聊天会话发送的、包含餐厅信息的分享内容)
+2026-01-10 01:35:30 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 0 个实体, 0 个关系
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 0 个实体, 0 个关系
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:683 - [任务 82403077] ✅ 提取完成:
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 0 个实体:
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 0 个关系:
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=82403077-ddd2-44a3-b519-5f53bdee1607, 3 classes, 0 entities, 0 relationships)
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:881 - Worker 0 提取完成，任务进入合并队列: 82403077...
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: 82403077...
+2026-01-10 01:35:30 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: 82403077...
+2026-01-10 01:35:30 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=82403077-ddd2-44a3-b519-5f53bdee1607, 3 classes, 0 entities, 0 relationships)
+2026-01-10 01:35:30 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 01:35:46 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 0 duplicates, 0 conflicts, 0 aligned, 0 optimized
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 0 duplicates, 0 conflicts, 0 aligned, 0 optimized
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 0 个实体到图
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 0 个, 更新 0 个, 失败 0 个
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 0 个关系到图
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 0 个, 更新 0 个, 失败 0 个
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 8 个实体, 8 个关系
+2026-01-10 01:35:46 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +0/~0, 关系 +0/~0
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: 82403077...
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: 82403077...
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:161 - 任务 82403077 完成，开始自动保存数据库...
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 16, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 3, 'entities': 0, 'relationships': 0}
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:35:46 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 16, 'predefined_entities': 5}, 'graph': {'entities': 8, 'relationships': 8}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:35:46 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:49 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:49 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:49 - graph_service - INFO - graph_service.py:939 - 服务关闭前已自动保存数据库
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:211 - 停止任务处理器...
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:978 - Merge Worker 被取消
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:983 - Merge Worker 停止
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:906 - Worker 1 被取消
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:911 - Worker 1 停止
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:906 - Worker 0 被取消
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:911 - Worker 0 停止
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:906 - Worker 2 被取消
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:911 - Worker 2 停止
+2026-01-10 01:49:49 - simplegraph - INFO - simplegraph.py:230 - 任务处理器已停止
+2026-01-10 01:49:51 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:51 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:49:51 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 01:49:51 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 01:49:51 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 01:49:51 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 01:49:53 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 8 个实体, 8 个关系
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 01:49:53 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 8 个实体
+2026-01-10 01:49:53 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 01:49:53 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 01:49:53 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）
+2026-01-10 01:50:03 - simplegraph - INFO - simplegraph.py:258 - 任务已提交: 8687ab52...
+2026-01-10 01:50:03 - simplegraph - INFO - simplegraph.py:854 - Worker 0 开始处理任务: 8687ab52...
+2026-01-10 01:50:03 - simplegraph - INFO - simplegraph.py:485 - 开始执行任务: 8687ab52-f44a-4c9e-992d-7c789f75180e
+2026-01-10 01:50:03 - simplegraph - INFO - simplegraph.py:509 - [任务 8687ab52] 🔧 开始System更新阶段
+2026-01-10 01:50:03 - simplegraph - INFO - simplegraph.py:510 - [任务 8687ab52] 输入文本:     "detailed_actions": [
+      {
+        "time": "2026-01-10T00:49:57.478000Z",
+        "action": "...
+2026-01-10 01:50:15 - simplegraph - INFO - simplegraph.py:1149 - 需要扩展 System，涉及 2 个类
+2026-01-10 01:50:15 - simplegraph - INFO - simplegraph.py:1153 - System 扩展完成: 新增 2 个类, 增强 0 个类
+2026-01-10 01:50:15 - simplegraph - INFO - simplegraph.py:1111 - System 已扩展:
+2026-01-10 01:50:15 - simplegraph - INFO - simplegraph.py:1112 -   新增类: ['餐厅', '聊天会话']
+2026-01-10 01:50:15 - simplegraph - INFO - simplegraph.py:1113 -   增强类: []
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:527 - [任务 8687ab52] ✅ System更新完成:
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 餐厅
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:532 -      描述: 提供餐饮服务的商家或店铺，可以是线上外卖平台或线下实体店
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:534 -      属性: 名称, 所属平台
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:531 -   ✨ 新增类: 聊天会话
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:532 -      描述: 在即时通讯应用中与特定联系人或群组的对话界面
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:534 -      属性: 所属平台, 会话对象
+2026-01-10 01:50:16 - simplegraph - INFO - simplegraph.py:669 - [任务 8687ab52] 🔍 开始实体和关系提取阶段
+2026-01-10 01:50:35 - simplegraph - INFO - simplegraph.py:1282 - 开始检查和优化提取结果（异步）...
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:1287 - 检查优化完成
+2026-01-10 01:51:24 - src.extractors.extractor - WARNING - extractor.py:600 - 实体 '我' 不存在，跳过类属性
+2026-01-10 01:51:24 - src.extractors.extractor - INFO - extractor.py:329 - 四步解析完成: 4 个实体, 14 个关系
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:1251 - 提取完成: 4 个实体, 14 个关系
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:683 - [任务 8687ab52] ✅ 提取完成:
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:684 -   📦 提取到 4 个实体:
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:687 -      • 美团外卖 [可启动应用, 外卖服务]
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:688 -        描述: 提供外卖订购与配送服务的移动应用平台
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:697 -        属性: 服务提供方=美团外卖平台
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:687 -      • 蔓味轻食·沙拉·健康餐 [餐厅]
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:688 -        描述: 位于美团外卖平台上的一个提供轻食沙拉的餐厅商家
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:697 -        属性: 名称=蔓味轻食·沙拉·健康餐, 所属平台=美团外卖
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:687 -      • 微信 [可启动应用, 交流平台]
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:688 -        描述: 一款由腾讯公司开发的即时通讯与社交应用
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:687 -      • 我与朋友的微信聊天会话 [聊天会话]
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:688 -        描述: 2026年1月10日，我在微信中选择并用于分享餐厅的特定聊天对话
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:697 -        属性: 发生时间=2026-01-10, 所属平台=微信
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:699 -   🔗 提取到 14 个关系:
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 美团外卖:可启动应用
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我打开美团外卖应用
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 美团外卖:外卖服务
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我使用美团外卖平台服务
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 美团外卖:外卖服务 → 我
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        美团外卖向我展示其首页
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 美团外卖:外卖服务
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我进入美团外卖的搜索引导页
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 美团外卖:外卖服务
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我使用美团外卖的全局搜索功能
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 美团外卖:外卖服务 → 蔓味轻食·沙拉·健康餐:餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        美团外卖向我展示“蔓味轻食·沙拉·健康餐”餐厅详情
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 蔓味轻食·沙拉·健康餐:餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我浏览“蔓味轻食·沙拉·健康餐”餐厅详情页
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 蔓味轻食·沙拉·健康餐:餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我首次分享“蔓味轻食·沙拉·健康餐”餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 蔓味轻食·沙拉·健康餐:餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我再次分享“蔓味轻食·沙拉·健康餐”餐厅
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信:可启动应用
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我打开微信应用
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 微信:交流平台
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我在微信上选择聊天对象
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 我与朋友的微信聊天会话:聊天会话
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我选择了特定的微信聊天会话用于分享
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 我 → 我与朋友的微信聊天会话:聊天会话
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        我通过微信发送了分享内容
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:702 -      • 蔓味轻食·沙拉·健康餐:餐厅 → 我与朋友的微信聊天会话:聊天会话
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:703 -        “蔓味轻食·沙拉·健康餐”餐厅信息被分享到特定微信聊天
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:827 - 任务执行完成: GraphDelta(task_id=8687ab52-f44a-4c9e-992d-7c789f75180e, 2 classes, 4 entities, 14 relationships)
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:881 - Worker 0 提取完成，任务进入合并队列: 8687ab52...
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:930 - Merge Worker 开始合并任务: 8687ab52...
+2026-01-10 01:51:24 - simplegraph - INFO - simplegraph.py:996 - 开始智能合并任务结果: 8687ab52...
+2026-01-10 01:51:24 - src.combiners.smart_merger - INFO - smart_merger.py:118 - 开始智能合并: GraphDelta(task_id=8687ab52-f44a-4c9e-992d-7c789f75180e, 2 classes, 4 entities, 14 relationships)
+2026-01-10 01:51:24 - src.combiners.smart_merger - INFO - smart_merger.py:126 - 使用LLM智能合并模式
+2026-01-10 01:54:26 - src.combiners.smart_merger - INFO - smart_merger.py:213 - 智能合并完成: MergeResult: 1 duplicates, 0 conflicts, 0 aligned, 1 optimized
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:1028 - 智能合并完成: MergeResult: 1 duplicates, 0 conflicts, 0 aligned, 1 optimized
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:149 - ============================================================
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:150 - 开始融合实体和关系
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:151 - ============================================================
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:51 - 开始融合 3 个实体到图
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:74 - 实体融合完成: 新增 3 个, 更新 0 个, 失败 0 个
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:89 - 开始融合 14 个关系到图
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:126 - 关系融合完成: 新增 14 个, 更新 0 个, 失败 0 个
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:159 - ============================================================
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:160 - 融合完成
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:161 - 图统计: 11 个实体, 22 个关系
+2026-01-10 01:54:26 - src.combiners.combiner - INFO - combiner.py:164 - ============================================================
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:1389 - 应用增量完成: 实体 +3/~0, 关系 +14/~0
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:1033 - 任务结果已合并到主图谱: 8687ab52...
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:956 - Merge Worker 任务合并完成: 8687ab52...
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:161 - 任务 8687ab52 完成，开始自动保存数据库...
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:167 - 保存前统计: {'system': {'classes': 18, 'predefined_entities': 5}, 'graph': {'entities': 11, 'relationships': 22}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:173 - 任务增量统计: {'classes': 2, 'entities': 4, 'relationships': 14}
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:964 - 保存数据库到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:385 - 保存 Graph 到: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:54:26 - simplegraph - INFO - simplegraph.py:388 - Graph 保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:981 - 数据库保存成功: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:180 - 保存后统计: {'system': {'classes': 18, 'predefined_entities': 5}, 'graph': {'entities': 11, 'relationships': 22}, 'tasks': {'total': 1, 'by_status': {'pending': 0, 'running': 0, 'completed': 1, 'failed': 0, 'cancelled': 0}}}
+2026-01-10 01:54:26 - graph_service - INFO - graph_service.py:182 - 自动保存成功: 数据库已保存到 D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 21:00:21 - graph_service - INFO - graph_service.py:46 - 检测到默认数据库文件，正在加载: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:403 - 从文件加载 Graph: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\backend\data\graph_database.pkl
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:99 - ============================================================
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:100 - 初始化 SimpleGraph
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:101 - ============================================================
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:110 - 初始化 LLM 客户端...
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:121 - LLM 客户端初始化完成 (verbose=False)
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:124 - 加载预定义 System...
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:126 - System 加载完成: 13 个类
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:129 - Graph 创建完成: 5 个实体（含预定义）
+2026-01-10 21:00:21 - src.combiners.smart_merger - INFO - smart_merger.py:94 - 已加载智能合并提示词: D:\CourseResources\3s\CoRe\Personal-GUI-Agent\graphrag\simple_graphrag\config\prompts\smart_merge.txt
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:145 - 智能合并器初始化完成 (enable_smart_merge=True)
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:158 - SimpleGraph 初始化完成
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:159 - ============================================================
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:423 - Graph 加载成功: 11 个实体, 22 个关系
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:193 - 启动 3 个提取workers和1个合并worker...
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:204 - 任务处理器启动完成
+2026-01-10 21:00:21 - graph_service - INFO - graph_service.py:57 - 已从默认数据库加载: 11 个实体
+2026-01-10 21:00:21 - src.search.search_engine - INFO - search_engine.py:204 - 搜索引擎初始化完成
+2026-01-10 21:00:21 - graph_service - INFO - graph_service.py:79 - SimpleGraph service initialized and started.
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:844 - Worker 0 启动
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:844 - Worker 1 启动
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:844 - Worker 2 启动
+2026-01-10 21:00:21 - simplegraph - INFO - simplegraph.py:920 - Merge Worker 启动（串行处理）

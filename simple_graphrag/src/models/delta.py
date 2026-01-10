@@ -143,7 +143,9 @@ class RelationshipDelta:
         description: 关系描述
         count: 关系强度/次数
         refer: 参与此关系的其他实体或实体类（引用列表）
-        operation: 操作类型 ("add", "update", "merge")
+        semantic_times: 语义时间列表（记录关系所表示事件的发生时间，ISO 8601格式）
+        operation: 操作类型 ("add", "update", "merge", "increment_count")
+        increment_amount: 【仅用于increment_count操作】要增加的次数
     """
 
     source: str
@@ -151,18 +153,25 @@ class RelationshipDelta:
     description: str
     count: int = 1
     refer: List[str] = field(default_factory=list)  # 引用列表
-    operation: str = "add"  # "add", "update", "merge"
+    semantic_times: List[str] = field(default_factory=list)  # 语义时间列表
+    operation: str = "add"  # "add", "update", "merge", "increment_count"
+    increment_amount: int = 0  # 仅用于increment_count操作
 
     def to_dict(self) -> dict:
         """转换为字典格式"""
-        return {
+        result = {
             "source": self.source,
             "target": self.target,
             "description": self.description,
             "count": self.count,
             "refer": self.refer,  # 引用列表
+            "semantic_times": self.semantic_times,  # 语义时间列表
             "operation": self.operation,
         }
+        # 只在increment_count操作时包含increment_amount
+        if self.operation == "increment_count":
+            result["increment_amount"] = self.increment_amount
+        return result
 
     @classmethod
     def from_dict(cls, data: dict) -> "RelationshipDelta":
@@ -177,7 +186,9 @@ class RelationshipDelta:
             description=data["description"],
             count=data.get("count", 1),
             refer=data.get("refer", []),  # 向后兼容
+            semantic_times=data.get("semantic_times", []),  # 向后兼容
             operation=data.get("operation", "add"),
+            increment_amount=data.get("increment_amount", 0),
         )
 
 

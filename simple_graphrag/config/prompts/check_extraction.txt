@@ -131,9 +131,46 @@
 ### Step E：关系格式标准化
 原子关系 `refer=NONE` → 复杂关系填充refer → 功能关系用 `entity:class` → 移除类主节点
 
+### Step F：语义时间提取
+识别关系时间信息 → 转换为ISO 8601格式 → 填充到semantic_time字段
+
+---
+
+## 🕐 语义时间提取规则
+
+**语义时间 (semantic_time)** 记录关系所表示事件的发生时间，格式为 **ISO 8601**（如 `2026-01-10T10:30:00`）。
+
+### 提取规则
+
+| 情况 | 处理方式 | 示例 |
+|------|---------|------|
+| 明确日期+时间 | 转为 `YYYY-MM-DDTHH:mm:ss` | "2026年1月10日10:30" → `2026-01-10T10:30:00` |
+| 仅日期 | 使用 `00:00:00` | "1月10日" → `2026-01-10T00:00:00` |
+| 相对时间 | 使用 `NONE` | "昨天"、"刚才" → `NONE` |
+| 无时间信息 | 使用 `NONE` | 无明确时间 → `NONE` |
+
+**注意**：从原始输入文本的时间戳（如 `detailed_actions` 中的 `time` 字段）提取时间信息。
+
+### 示例
+
+假设原始文本包含：
+```json
+{{
+  "time": "2026-01-10T00:50:13.478000Z",
+  "action": "分享餐厅到微信"
+}}
+```
+
+则对应的关系应为：
+```
+("relationship"|我分享蔓味轻食的操作:分享操作|微信:交流平台|我将餐厅信息分享到微信平台|1|蔓味轻食的餐厅详情页:餐厅详情|2026-01-10T00:50:13)^
+```
+
 ---
 
 ## 📤 输出格式规范
+
+> **重要**：检查阶段**不需要**输出STEP 0（属性建议），直接从STEP 1开始输出优化后的结果。
 
 ### 格式模板
 
@@ -152,10 +189,10 @@ SECTION_DELIMITER
 
 STEP 3 - Relationships:
 # Phase 1: 原子关系
-("relationship"|<source_node>|<target_node>|<relationship_description>|<relationship_count>|NONE)^
+("relationship"|<source_node>|<target_node>|<relationship_description>|<relationship_count>|NONE|<semantic_time>)^
 ...
 # Phase 3: 复杂事件关系
-("relationship"|<source_node>|<target_node>|<relationship_description>|<relationship_count>|<refer_list>)^
+("relationship"|<source_node>|<target_node>|<relationship_description>|<relationship_count>|<refer_list>|<semantic_time>)^
 ...
 
 DONE
@@ -167,8 +204,8 @@ DONE
 
 | 类别 | 要求 |
 |------|------|
-| **完整性** | 所有4个STEP，包含所有优化后内容，不遗漏关系 |
-| **格式** | 分隔符：`|` `^` `SECTION_DELIMITER`，refer：原子=`NONE`，复杂=`entity:class,entity:class` |
+| **完整性** | STEP 1、2、3（不包括STEP 0），包含所有优化后内容，不遗漏关系 |
+| **格式** | 分隔符：`|` `^` `SECTION_DELIMITER`，refer：原子=`NONE`，复杂=`entity:class,entity:class`，semantic_time：ISO 8601或`NONE` |
 | **实体命名** | 唯一性，无泛指，无UI元素或页面，描述详细 |
 | **关系** | 原子+复杂共存，功能用 `entity:class`，无类主节点，组合已声明 |
 | **可读性** | 添加 `# Phase 1/3` 注释，分组排列，结尾 `DONE` |
@@ -179,8 +216,15 @@ DONE
 
 **请按照以上检查要点和优化步骤，输出完整优化后的提取结果。**
 
+> ⚠️ **格式严格要求**：
+> - **只输出标准格式的提取结果**，不要添加任何解释、分析或报告文字
+> - **不要输出任何标题、分隔线或Markdown格式**（除了代码注释）
+> - **直接以 `STEP 1 - Entities:` 开始**，以 `DONE` 结束
+> - **不要输出STEP 0**（检查阶段不需要属性建议）
+
 **特别强调**：
 1. ⚠️ 将所有泛指实体（如"聊天记录"、"视频"、"套餐"）改为具体唯一实体
 2. ⚠️ 确保原子关系详尽，不遗漏任何动作
 3. ⚠️ 复杂事件必须另起关系，使用 refer 字段
 4. ⚠️ 所有实体描述必须详细，提供充足上下文
+5. ⚠️ 所有关系必须包含 semantic_time 字段（ISO 8601格式或NONE）

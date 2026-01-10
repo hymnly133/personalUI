@@ -683,8 +683,9 @@ class GraphExtractor:
         """
         解析关系记录
 
-        格式: ("relationship"|source|target|DESCRIPTION|COUNT|REFER_LIST)
+        格式: ("relationship"|source|target|DESCRIPTION|COUNT|REFER_LIST|SEMANTIC_TIME)
         REFER_LIST: 逗号分隔的实体列表（如"微信:交流平台,支付宝:支付工具"）或"NONE"
+        SEMANTIC_TIME: ISO 8601格式的时间（如"2026-01-10T10:30:00"）或"NONE"
         """
         try:
             # 移除括号和引号
@@ -711,12 +712,21 @@ class GraphExtractor:
                     # 按逗号分割，去除空格
                     refer = [r.strip() for r in refer_str.split(",") if r.strip()]
 
+            # 解析 semantic_time 字段（新增，向后兼容）
+            semantic_times = []
+            if len(parts) >= 7:
+                semantic_time_str = parts[6].strip()
+                if semantic_time_str and semantic_time_str.upper() != "NONE":
+                    # 如果提供了有效的时间，添加到列表
+                    semantic_times.append(semantic_time_str)
+
             relationship = Relationship(
                 source=source,
                 target=target,
                 description=description,
                 count=count,
                 refer=refer,  # 添加 refer 字段
+                semantic_times=semantic_times,  # 添加 semantic_times 字段
             )
 
             if refer:

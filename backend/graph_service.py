@@ -9,7 +9,6 @@ import json
 sys.path.append(str(Path(__file__).parent.parent / "simple_graphrag"))
 
 from simplegraph import SimpleGraph
-from src.search.search_engine import SearchEngine
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -18,7 +17,6 @@ logger = get_logger(__name__)
 class GraphService:
     def __init__(self):
         self.sg: Optional[SimpleGraph] = None
-        self.search_engine: Optional[SearchEngine] = None
         self.config_path = (
             Path(__file__).parent.parent / "simple_graphrag" / "config" / "config.yaml"
         )
@@ -72,9 +70,6 @@ class GraphService:
             )
             await self.sg.start()
             logger.info("新数据库创建完成")
-
-        # 初始化搜索引擎
-        self.search_engine = SearchEngine(self.sg.graph)
 
         logger.info("SimpleGraph service initialized and started.")
 
@@ -418,6 +413,7 @@ class GraphService:
                     "edge_type": "relationship",
                     "count": rel.count,
                     "refer": rel.refer,  # 添加 refer 字段
+                    "semantic_times": rel.semantic_times,  # 添加 semantic_times 字段
                 }
             )
 
@@ -705,6 +701,7 @@ class GraphService:
                         "description": rel.description,
                         "count": rel.count,
                         "refer": rel.refer,
+                        "semantic_times": rel.semantic_times,  # 添加 semantic_times 字段
                     }
                 )
 
@@ -856,10 +853,10 @@ class GraphService:
         Returns:
             搜索结果列表
         """
-        if not self.search_engine:
+        if not self.sg:
             return []
 
-        results = self.search_engine.search_keyword(keyword, fuzzy, limit)
+        results = self.sg.search_keyword(keyword, fuzzy, limit)
 
         # 转换为API返回格式
         return [
@@ -882,10 +879,10 @@ class GraphService:
         Returns:
             节点详细信息
         """
-        if not self.search_engine:
+        if not self.sg:
             return None
 
-        node_detail = self.search_engine.get_node_detail(node_id)
+        node_detail = self.sg.get_node_detail(node_id)
         if not node_detail:
             return None
 
@@ -901,10 +898,10 @@ class GraphService:
         Returns:
             实体节点组
         """
-        if not self.search_engine:
+        if not self.sg:
             return None
 
-        entity_group = self.search_engine.get_entity_node_group(entity_name)
+        entity_group = self.sg.get_entity_node_group(entity_name)
         if not entity_group:
             return None
 
@@ -920,10 +917,10 @@ class GraphService:
         Returns:
             类节点组
         """
-        if not self.search_engine:
+        if not self.sg:
             return None
 
-        class_group = self.search_engine.get_class_node_group(class_name)
+        class_group = self.sg.get_class_node_group(class_name)
         if not class_group:
             return None
 
@@ -1020,9 +1017,6 @@ class GraphService:
             # 启动服务
             await self.sg.start()
 
-            # 重新初始化搜索引擎
-            self.search_engine = SearchEngine(self.sg.graph)
-
             # 获取统计信息
             stats = self.sg.get_statistics()
 
@@ -1106,9 +1100,6 @@ class GraphService:
                 progress_callback=self._on_progress,
             )
             await self.sg.start()
-
-            # 初始化搜索引擎
-            self.search_engine = SearchEngine(self.sg.graph)
 
             # 确定保存路径
             if file_name:

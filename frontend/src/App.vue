@@ -375,6 +375,24 @@
 											</el-tag>
 										</el-space>
 									</el-descriptions-item>
+									<el-descriptions-item
+										label="Semantic Times (语义时间)"
+										v-if="
+											selectedEdge.semantic_times &&
+											selectedEdge.semantic_times.length > 0
+										"
+									>
+										<el-space direction="vertical" :size="4">
+											<el-tag
+												v-for="(time, idx) in selectedEdge.semantic_times"
+												:key="idx"
+												type="success"
+												size="small"
+											>
+												{{ time }}
+											</el-tag>
+										</el-space>
+									</el-descriptions-item>
 								</el-descriptions>
 							</div>
 
@@ -1328,6 +1346,7 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 	edge_type: string;
 	count?: number;
 	refer?: string[]; // 参与此关系的其他实体
+	semantic_times?: string[]; // 语义时间列表（ISO 8601格式）
 	linkIndex?: number; // 在相同source-target对中的索引
 	linkTotal?: number; // 相同source-target对的总数
 }
@@ -1802,7 +1821,14 @@ const updateLinks = (linksData: Link[]) => {
 		tooltip += `类型: ${d.edge_type}\n`;
 		if (d.description) tooltip += `描述: ${d.description}\n`;
 		if (d.count !== undefined) tooltip += `计数: ${d.count}\n`;
-		if (d.refer && d.refer.length > 0) tooltip += `参与: ${d.refer.join(", ")}`;
+		if (d.refer && d.refer.length > 0)
+			tooltip += `参与: ${d.refer.join(", ")}\n`;
+		if (d.semantic_times && d.semantic_times.length > 0) {
+			tooltip += `语义时间 (${d.semantic_times.length}):\n`;
+			d.semantic_times.forEach((time: string, idx: number) => {
+				tooltip += `  ${idx + 1}. ${time}\n`;
+			});
+		}
 		return tooltip;
 	});
 

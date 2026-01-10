@@ -47,6 +47,34 @@ class SearchResult:
     context: Dict[str, Any] = field(default_factory=dict)  # 上下文信息
     score: float = 1.0  # 相关度得分（0-1）
 
+    def to_dict(self) -> Dict[str, Any]:
+        """转换为字典格式，便于JSON序列化"""
+        # 将matched_item转换为可序列化的格式
+        matched_item_data = None
+        if isinstance(self.matched_item, str):
+            matched_item_data = self.matched_item
+        elif hasattr(self.matched_item, "name"):
+            # Entity或ClassNode等有name属性的对象
+            matched_item_data = self.matched_item.name
+        elif hasattr(self.matched_item, "node_id"):
+            # 有node_id的对象
+            matched_item_data = self.matched_item.node_id
+        else:
+            # 其他情况，尝试转换为字符串
+            matched_item_data = str(self.matched_item)
+
+        return {
+            "result_type": (
+                self.result_type.value
+                if isinstance(self.result_type, SearchResultType)
+                else str(self.result_type)
+            ),
+            "matched_text": self.matched_text,
+            "matched_item": matched_item_data,
+            "context": self.context,
+            "score": self.score,
+        }
+
 
 @dataclass
 class EntityNodeGroup:

@@ -18,6 +18,9 @@ class Relationship:
     refer: List[str] = field(
         default_factory=list
     )  # 参与此关系的其他实体或实体类（引用）
+    semantic_times: List[str] = field(
+        default_factory=list
+    )  # 语义时间列表（记录关系所表示事件的发生时间，ISO 8601格式）
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -58,10 +61,20 @@ class Relationship:
             and self_refer == other_refer
         )
 
-    def increment_count(self, additional_count: int = 1) -> None:
-        """增加关系次数（用于增量更新时合并关系）"""
+    def increment_count(
+        self, additional_count: int = 1, semantic_time: Optional[str] = None
+    ) -> None:
+        """
+        增加关系次数（用于增量更新时合并关系）
+
+        Args:
+            additional_count: 要增加的次数
+            semantic_time: 可选的语义时间（ISO 8601格式），如果提供则追加到semantic_times列表
+        """
         self.count = max(1, self.count + additional_count)
         self.updated_at = datetime.now()
+        if semantic_time:
+            self.semantic_times.append(semantic_time)
 
     def to_dict(self) -> dict:
         """转换为字典格式"""
@@ -71,6 +84,7 @@ class Relationship:
             "description": self.description,
             "count": self.count,
             "refer": self.refer,  # 引用列表
+            "semantic_times": self.semantic_times,  # 语义时间列表
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
@@ -91,6 +105,9 @@ class Relationship:
         # 向后兼容：如果数据中没有 refer，使用空列表
         refer = data.get("refer", [])
 
+        # 向后兼容：如果数据中没有 semantic_times，使用空列表
+        semantic_times = data.get("semantic_times", [])
+
         # 向后兼容：支持旧字段名 source/target
         source = data.get("source") or data.get("source")
         target = data.get("target") or data.get("target")
@@ -101,6 +118,7 @@ class Relationship:
             description=data["description"],
             count=count,
             refer=refer,
+            semantic_times=semantic_times,
             created_at=created_at,
             updated_at=updated_at,
         )

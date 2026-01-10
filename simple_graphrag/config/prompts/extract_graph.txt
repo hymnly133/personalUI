@@ -135,12 +135,28 @@ NO_NEW_PROPERTIES
 
 **输出格式**：
 ```
-("relationship"{tuple_delimiter}<源节点>{tuple_delimiter}<目标节点>{tuple_delimiter}<关系描述>{tuple_delimiter}<关系次数>{tuple_delimiter}<refer列表>)
+("relationship"{tuple_delimiter}<源节点>{tuple_delimiter}<目标节点>{tuple_delimiter}<关系描述>{tuple_delimiter}<关系次数>{tuple_delimiter}<refer列表>{tuple_delimiter}<语义时间>)
 ```
 
 **refer 格式**：
 - 原子关系：`NONE`
 - 复杂关系：`实体1:类1,实体2:类2`（逗号分隔，无空格）
+
+**语义时间格式**：
+- 【重要】只识别语料中出现的绝对时间，不处理相对时间
+- 识别文本中的绝对时间表达式（如"2026年1月10日"、"1月10日上午10点"、"2026-01-10"、"10:30"等）
+- 不处理相对时间（如"今天"、"昨天"、"明天"、"刚才"等）- 遇到相对时间使用 `NONE`
+- 转换为ISO 8601格式：`2026-01-10T10:30:00`
+- 如果只有日期没有时间，使用 `00:00:00`（如"1月10日" → "2026-01-10T00:00:00"）
+- 如果没有明确时间信息或是相对时间，使用 `NONE`
+
+**语义时间示例**：
+- "2026年1月10日上午10:30" → `2026-01-10T10:30:00`
+- "1月10日" → `2026-01-10T00:00:00`
+- "上午10:30" → `NONE（没有日期）`
+- "昨天" → `NONE`（相对时间，不处理）
+- "刚才" → `NONE`（相对时间，不处理）
+- 无时间信息 → `NONE`
 
 ---
 
@@ -271,13 +287,13 @@ SECTION_DELIMITER
 
 STEP 3:
 # Phase 1 原子关系
-("relationship"{tuple_delimiter}我{tuple_delimiter}微信:可启动应用{tuple_delimiter}我打开微信{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}小明:可联系人{tuple_delimiter}我联系了小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我把视频分享给小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上联系小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}微信:可启动应用{tuple_delimiter}我打开微信{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}小明:可联系人{tuple_delimiter}我联系了小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我把视频分享给小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上联系小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 # Phase 3 复杂事件关系
-("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我通过微信把视频分享给小明{tuple_delimiter}1{tuple_delimiter}关于AI绘图的视频:内容){record_delimiter}
-("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上把视频分享给小明{tuple_delimiter}1{tuple_delimiter}微信:交流平台){record_delimiter}
+("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我通过微信把视频分享给小明{tuple_delimiter}1{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上把视频分享给小明{tuple_delimiter}1{tuple_delimiter}微信:交流平台{tuple_delimiter}NONE){record_delimiter}
 {completion_delimiter}
 ```
 
@@ -310,10 +326,10 @@ STEP 2:
 SECTION_DELIMITER
 
 STEP 3:
-("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:可启动应用{tuple_delimiter}我打开抖音{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:内容平台{tuple_delimiter}我在抖音上浏览内容{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}张三的店:餐厅{tuple_delimiter}我发现了张三的店{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}抖音:内容平台{tuple_delimiter}张三的店:餐厅{tuple_delimiter}张三的店在抖音上被展示{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:可启动应用{tuple_delimiter}我打开抖音{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:内容平台{tuple_delimiter}我在抖音上浏览内容{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}张三的店:餐厅{tuple_delimiter}我发现了张三的店{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}抖音:内容平台{tuple_delimiter}张三的店:餐厅{tuple_delimiter}张三的店在抖音上被展示{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 {completion_delimiter}
 ```
 

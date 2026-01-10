@@ -40,6 +40,7 @@ class Graph:
         self._entity_relationships: Dict[str, Set[str]] = defaultdict(
             set
         )  # 节点到关系的映射（包括实体、类节点、类主节点）
+        self._search_engine = None  # 搜索引擎引用（由外部设置）
 
         # Graph 内部维持对 system 的引用；且“类本身”的真相只在 system 中
         # （Graph 不维护等价的 class_master_nodes 状态）
