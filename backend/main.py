@@ -387,6 +387,232 @@ async def get_class_node_group(class_name: str):
     return class_group
 
 
+# ========== 数据库管理 API ==========
+
+
+class DatabaseSaveRequest(BaseModel):
+    file_name: Optional[str] = None  # 文件名（可选，不指定则使用默认）
+
+
+class DatabaseLoadRequest(BaseModel):
+    file_name: Optional[str] = None  # 文件名（可选，不指定则使用默认）
+
+
+class AutoSaveConfig(BaseModel):
+    enabled: bool
+
+
+class DatabaseCreateRequest(BaseModel):
+    file_name: Optional[str] = None  # 文件名（可选）
+
+
+class DatabaseDeleteRequest(BaseModel):
+    file_name: str  # 要删除的文件名
+
+
+class DatabaseRenameRequest(BaseModel):
+    old_name: str  # 旧文件名
+    new_name: str  # 新文件名
+
+
+@app.post("/api/database/create", response_model=dict)
+async def create_new_database(request: DatabaseCreateRequest):
+    """
+    创建新的空数据库
+
+    Args:
+        file_name: 文件名（可选），如果不指定则使用默认文件名
+
+    Returns:
+        创建结果信息，包含：
+        - success: 是否成功
+        - file_path: 文件路径
+        - file_name: 文件名
+        - statistics: 数据库统计信息
+        - message: 提示消息
+    """
+    try:
+        result = await graph_service.create_new_database(request.file_name)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/database/save", response_model=dict)
+async def save_database(request: DatabaseSaveRequest):
+    """
+    保存数据库到文件
+
+    Args:
+        file_name: 文件名（可选），如果不指定则使用默认文件名
+
+    Returns:
+        保存结果信息，包含：
+        - success: 是否成功
+        - file_path: 保存的文件路径
+        - file_size: 文件大小（字节）
+        - statistics: 数据库统计信息
+        - message: 提示消息
+    """
+    try:
+        file_path = None
+        if request.file_name:
+            from pathlib import Path
+
+            file_path = graph_service.data_dir / request.file_name
+
+        result = await graph_service.save_database(file_path)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/database/load", response_model=dict)
+async def load_database(request: DatabaseLoadRequest):
+    """
+    从文件加载数据库
+
+    Args:
+        file_name: 文件名（可选），如果不指定则使用默认文件名
+
+    Returns:
+        加载结果信息，包含：
+        - success: 是否成功
+        - file_path: 加载的文件路径
+        - file_size: 文件大小（字节）
+        - statistics: 数据库统计信息
+        - message: 提示消息
+    """
+    try:
+        file_path = None
+        if request.file_name:
+            from pathlib import Path
+
+            file_path = graph_service.data_dir / request.file_name
+
+        result = await graph_service.load_database(file_path)
+        return result
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/database/list", response_model=List[dict])
+async def list_databases():
+    """
+    列出所有可用的数据库文件
+
+    Returns:
+        数据库文件列表，每个包含：
+        - file_name: 文件名
+        - file_path: 完整路径
+        - file_size: 文件大小（字节）
+        - modified_time: 最后修改时间（Unix时间戳）
+        - is_default: 是否为默认数据库文件
+    """
+    try:
+        databases = await graph_service.list_database_files()
+        return databases
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.put("/api/database/auto-save", response_model=dict)
+async def set_auto_save(config: AutoSaveConfig):
+    """
+    设置是否启用自动保存
+
+    Args:
+        enabled: 是否启用自动保存
+
+    Returns:
+        配置结果
+    """
+    try:
+        graph_service.set_auto_save(config.enabled)
+        return {
+            "success": True,
+            "auto_save_enabled": config.enabled,
+            "message": f"自动保存已{'启用' if config.enabled else '禁用'}",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/database/status", response_model=dict)
+async def get_database_status():
+    """
+    获取数据库状态信息
+
+    Returns:
+        数据库状态，包含：
+        - initialized: 是否已初始化
+        - default_path: 默认数据库路径
+        - auto_save_enabled: 是否启用自动保存
+        - statistics: 当前图谱统计信息
+    """
+    try:
+        status = {
+            "initialized": graph_service.sg is not None,
+            "default_path": str(graph_service.get_default_database_path()),
+            "auto_save_enabled": graph_service.auto_save_enabled,
+            "data_directory": str(graph_service.data_dir),
+        }
+
+        if graph_service.sg:
+            status["statistics"] = graph_service.get_stats()
+
+        return status
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/database/{file_name}", response_model=dict)
+async def delete_database(file_name: str):
+    """
+    删除数据库文件
+
+    Args:
+        file_name: 要删除的数据库文件名
+
+    Returns:
+        删除结果
+    """
+    try:
+        result = await graph_service.delete_database(file_name)
+        return result
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.put("/api/database/rename", response_model=dict)
+async def rename_database(request: DatabaseRenameRequest):
+    """
+    重命名数据库文件
+
+    Args:
+        old_name: 旧文件名
+        new_name: 新文件名
+
+    Returns:
+        重命名结果
+    """
+    try:
+        result = await graph_service.rename_database(request.old_name, request.new_name)
+        return result
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 if __name__ == "__main__":
     import uvicorn
 

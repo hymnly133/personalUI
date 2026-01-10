@@ -448,11 +448,16 @@ class GraphExtractor:
             records = [
                 r.strip() for r in text.split(record_delimiter_pattern) if r.strip()
             ]
-        # 过滤掉标题行和空行，但保留包含实体格式的记录
+        # 过滤掉标题行、注释行和空行，但保留包含实体格式的记录
         filtered_records = []
         for record in records:
             # 跳过空行
             if not record.strip():
+                continue
+
+            # 跳过注释行（以 # 开头）
+            if record.strip().startswith("#"):
+                logger.debug(f"过滤注释行: {record[:50]}")
                 continue
 
             # 如果记录包含实体格式，即使包含标题行内容也要保留
@@ -461,6 +466,7 @@ class GraphExtractor:
                 '("entity"' in record
                 or '("class_property"' in record
                 or '("relationship"' in record
+                or '("new_property"' in record
             )
 
             if contains_entity_format:
@@ -472,11 +478,16 @@ class GraphExtractor:
                         line = line.strip()
                         if not line:
                             continue
+                        # 跳过注释行
+                        if line.startswith("#"):
+                            logger.debug(f"从混合行中过滤注释: {line[:50]}")
+                            continue
                         # 提取实体格式的行
                         if (
                             line.startswith('("entity"')
                             or line.startswith('("class_property"')
                             or line.startswith('("relationship"')
+                            or line.startswith('("new_property"')
                         ):
                             filtered_records.append(line)
                             logger.debug(f"从混合行中提取实体记录: {line[:80]}")
@@ -491,6 +502,10 @@ class GraphExtractor:
                 or record == "Entities:"
                 or record == "Classes and Properties:"
                 or record == "Relationships:"
+                or record.startswith("STEP 0")
+                or record.startswith("STEP 1")
+                or record.startswith("STEP 2")
+                or record.startswith("STEP 3")
             )
 
             # 如果是标题行且不包含实体格式，跳过
@@ -691,6 +706,8 @@ class GraphExtractor:
             if len(parts) >= 6:
                 refer_str = parts[5].strip()
                 if refer_str and refer_str.upper() != "NONE":
+                    # 处理中文逗号和英文逗号
+                    refer_str = refer_str.replace("，", ",")
                     # 按逗号分割，去除空格
                     refer = [r.strip() for r in refer_str.split(",") if r.strip()]
 

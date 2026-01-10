@@ -385,6 +385,47 @@ class SimpleGraph:
         logger.info(f"保存 Graph 到: {path}")
         path.parent.mkdir(parents=True, exist_ok=True)
         self.graph.save(path)
+        logger.info(f"Graph 保存成功: {path}")
+
+    @classmethod
+    def load(cls, config_path: Path, graph_path: Path, **kwargs) -> "SimpleGraph":
+        """
+        从文件加载graph并创建SimpleGraph实例
+
+        Args:
+            config_path: 配置文件路径
+            graph_path: graph文件路径
+            **kwargs: 其他初始化参数（max_concurrent_tasks, enable_smart_merge等）
+
+        Returns:
+            加载的SimpleGraph实例
+        """
+        logger.info(f"从文件加载 Graph: {graph_path}")
+
+        if not graph_path.exists():
+            raise FileNotFoundError(f"Graph文件不存在: {graph_path}")
+
+        # 创建SimpleGraph实例（不包含预定义实体，因为会从文件加载）
+        instance = cls(config_path=config_path, **kwargs)
+
+        # 加载graph（会覆盖默认创建的空graph）
+        instance.graph = Graph.load(graph_path)
+
+        # 同步system（从加载的graph中获取）
+        instance.system = instance.graph.system
+
+        # 重新初始化 combiner，让它引用新加载的 graph 实例
+        # 这是关键修复：确保 combiner 操作的是新加载的 graph，而不是初始化时的空 graph
+        from src.combiners.combiner import Combiner
+
+        instance.combiner = Combiner(instance.graph, strict_validation=False)
+
+        logger.info(
+            f"Graph 加载成功: {instance.graph.get_entity_count()} 个实体, "
+            f"{instance.graph.get_relationship_count()} 个关系"
+        )
+
+        return instance
 
     def visualize(self, output_path: Path, render_class_master_nodes: bool = True):
         """

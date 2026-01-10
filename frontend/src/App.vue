@@ -11,7 +11,7 @@
 		</el-header>
 
 		<el-container class="content-container">
-			<el-aside class="aside">
+			<el-aside class="aside" :style="{ width: asideWidth + 'px' }">
 				<el-tabs v-model="activeTab" class="tabs-container">
 					<el-tab-pane label="Search" name="search">
 						<div class="tab-pane-content">
@@ -548,8 +548,22 @@
 							</div>
 						</div>
 					</el-tab-pane>
+
+					<!-- 数据库管理 -->
+					<el-tab-pane label="Database" name="database">
+						<div class="tab-pane-content">
+							<DatabaseManager @database-loaded="handleDatabaseLoaded" />
+						</div>
+					</el-tab-pane>
 				</el-tabs>
 			</el-aside>
+
+			<!-- 可拖拽的分隔线 -->
+			<div
+				class="resize-handle"
+				@mousedown="startResize"
+				:class="{ resizing: isResizing }"
+			></div>
 
 			<el-main class="main-viz">
 				<div id="graph-container" ref="graphContainer"></div>
@@ -1293,6 +1307,7 @@ import {
 	Search,
 	DataAnalysis,
 } from "@element-plus/icons-vue";
+import DatabaseManager from "./components/DatabaseManager.vue";
 
 interface Node extends d3.SimulationNodeDatum {
 	id: string;
@@ -1350,6 +1365,12 @@ const nodeIdQuery = ref("");
 const querying = ref(false);
 const groupQueryName = ref("");
 const searchResults = ref<string | null>(null);
+
+// 左侧面板宽度调整相关
+const asideWidth = ref(600); // 默认宽度 600px
+const isResizing = ref(false);
+const minAsideWidth = 300; // 最小宽度
+const maxAsideWidth = 1200; // 最大宽度
 
 // 图谱渲染相关变量
 let svg: d3.Selection<SVGSVGElement, unknown, null, undefined>;
@@ -2050,6 +2071,14 @@ const refreshGraph = async () => {
 	}
 };
 
+// 数据库加载后的处理
+const handleDatabaseLoaded = async () => {
+	ElMessage.success("数据库已加载，正在刷新图谱...");
+	await refreshGraph();
+	await fetchStats();
+	ElMessage.success("图谱已更新");
+};
+
 const updateGraph = (newData: { nodes: Node[]; links: Link[] }) => {
 	if (!isGraphInitialized.value) {
 		// 首次初始化
@@ -2454,7 +2483,49 @@ const formatClassGroup = (classGroup: any) => {
 	return output;
 };
 
+// ==================== 左侧面板宽度调整 ====================
+
+const startResize = (event: MouseEvent) => {
+	isResizing.value = true;
+	document.addEventListener("mousemove", handleResizeDrag);
+	document.addEventListener("mouseup", stopResize);
+	event.preventDefault();
+};
+
+const handleResizeDrag = (event: MouseEvent) => {
+	if (!isResizing.value) return;
+
+	// 计算新的宽度
+	const newWidth = event.clientX;
+
+	// 限制在最小和最大宽度之间
+	if (newWidth >= minAsideWidth && newWidth <= maxAsideWidth) {
+		asideWidth.value = newWidth;
+		// 保存到 localStorage
+		localStorage.setItem("asideWidth", newWidth.toString());
+	}
+};
+
+const stopResize = () => {
+	isResizing.value = false;
+	document.removeEventListener("mousemove", handleResizeDrag);
+	document.removeEventListener("mouseup", stopResize);
+};
+
+// 从 localStorage 加载保存的宽度
+const loadAsideWidth = () => {
+	const savedWidth = localStorage.getItem("asideWidth");
+	if (savedWidth) {
+		const width = parseInt(savedWidth);
+		if (width >= minAsideWidth && width <= maxAsideWidth) {
+			asideWidth.value = width;
+		}
+	}
+};
+
 onMounted(async () => {
+	// 加载保存的侧边栏宽度
+	loadAsideWidth();
 	await fetchTasks();
 	await fetchStats();
 	initSSE();
@@ -2495,6 +2566,10 @@ onUnmounted(() => {
 	// 清理resize监听
 	window.removeEventListener("resize", handleResize);
 
+	// 清理拖拽监听
+	document.removeEventListener("mousemove", handleResizeDrag);
+	document.removeEventListener("mouseup", stopResize);
+
 	// 停止模拟
 	if (simulation) {
 		simulation.stop();
@@ -2530,13 +2605,40 @@ onUnmounted(() => {
 	overflow: hidden;
 }
 .aside {
-	width: 33.33% !important;
-	border-right: 1px solid #e6e6e6;
+	border-right: none;
 	background-color: #fff;
 	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	min-width: 300px;
+	max-width: 1200px;
+	width: 600px; /* 默认宽度，会被内联样式覆盖 */
+}
+
+/* 可拖拽的分隔线 */
+.resize-handle {
+	width: 5px;
+	background-color: #e6e6e6;
+	cursor: col-resize;
+	position: relative;
+	flex-shrink: 0;
+	transition: background-color 0.2s;
+	z-index: 100;
+}
+
+.resize-handle:hover {
+	background-color: #409eff;
+}
+
+.resize-handle.resizing {
+	background-color: #409eff;
+}
+
+/* 拖拽时禁用文本选择 */
+.resize-handle.resizing ~ * {
+	user-select: none;
+	pointer-events: none;
 }
 .tabs-container {
 	flex: 1;
