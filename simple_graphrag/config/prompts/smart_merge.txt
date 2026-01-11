@@ -12,12 +12,25 @@
 ### 当前Graph摘要
 - 实体数量: {entity_count}
 - 关系数量: {relationship_count}
-- 现有实体列表: {existing_entities}
 
-### 现有实体详情（前20个）
+### 所有现有实体详情（完整列表，不包含关系）
+以下是当前图谱中的所有实体信息，包括实体名称、描述、所属类和属性值：
+
 ```json
-{existing_entities_detail}
+{existing_entities_full}
 ```
+
+### Delta相关的现有数据（模糊搜索结果）
+以下是通过对待合并delta中每个实体进行模糊搜索后，找到的可能相关的现有实体。
+这些数据已去重合并，按相关度排序。每个实体标记了是由delta中的哪个实体搜索得到的（matched_by字段）。
+
+```json
+{delta_related_data}
+```
+
+**说明**：
+- 如果delta_related_data中有实体与delta中的实体名称完全相同或非常相似，说明该实体很可能已存在于图谱中
+- search_score表示相关度得分（0-1），得分越高说明越相关
 
 ## 待合并的增量更新
 
@@ -27,12 +40,25 @@
 
 ## 合并任务
 
-请分析待合并的增量更新，执行以下任务：
+请分析待合并的增量更新，充分利用提供的现有数据进行智能合并：
+
+### 0. 数据理解与对照
+在开始合并前，先理解提供的数据：
+- **所有现有实体详情**: 包含当前图谱中的所有实体，你应该用这些数据来判断实体是否已存在
+- **Delta相关的现有数据**: 这是针对delta中每个实体的模糊搜索结果，重点关注：
+  - 如果搜索结果中有与delta实体名称相同或高度相似的实体，说明该实体很可能已存在
+  - search_score越高，说明相关性越强
+- **对照策略**: 
+  1. 对于delta中的每个实体，先在"Delta相关的现有数据"中查找是否有相关实体
+  2. 如果找到高相关度的实体（search_score > 0.5或名称非常相似），再到"所有现有实体详情"中查看完整信息
+  3. 基于完整信息做出合并决策
 
 ### 1. 去重识别
 识别增量中与现有图谱重复的实体和关系：
+- **优先查看Delta相关数据**: 首先检查"Delta相关的现有数据"中是否已有该实体
 - 检查实体名称的同义词、缩写、不同表达方式
 - 识别本质相同但描述不同的实体
+- 如果delta实体在"所有现有实体详情"中存在，operation应设为"update"或"skip"而非"add"
 - 检查重复的关系
 
 ### 2. 命名对齐
@@ -59,6 +85,7 @@
 - "merge": 与现有项合并，需要指定merge_target（目标实体名）
 - "update": 更新现有项的属性/描述
 - "skip": 完全重复，跳过
+- "increment_count": 【仅用于关系】增量中的关系与现有关系语义完全相同（source、target、description、refer都相同），只需累加count，不添加新关系
 
 ## 输出格式
 
@@ -105,9 +132,11 @@
       "description": "优化后的关系描述",
       "count": 1,
       "refer": ["参与实体1", "参与实体2"],
+      "semantic_times": ["2026-01-10T10:30:00"],
       "operation": "add",
       "merge_target": null,
-      "reason": "操作原因说明"
+      "reason": "操作原因说明",
+      "increment_amount": 0
     }}
   ],
   "merge_summary": {{
@@ -123,10 +152,11 @@
 ## 重要规则
 
 1. **去重优先**: 宁可保守合并，也不要创建重复实体
-2. **保留现有命名**: 如果实体已存在，使用现有名称
-3. **信息不丢失**: 合并时不要丢失有价值的信息
-4. **操作明确**: 每个项必须有明确的operation和reason
-5. **JSON格式**: 输出必须是有效的JSON，不要添加任何其他内容
+2. **增量累加优先**: 如果关系与现有关系语义上完全相同，使用increment_count操作累加次数
+3. **保留现有命名**: 如果实体已存在，使用现有名称
+4. **信息不丢失**: 合并时不要丢失有价值的信息
+5. **操作明确**: 每个项必须有明确的operation和reason
+6. **JSON格式**: 输出必须是有效的JSON，不要添加任何其他内容
 
 ## 【严重警告】实体节点 vs 类节点：永远不要混淆！
 
@@ -468,30 +498,238 @@
      c. 将关系修改为使用 "实体名:类名" 格式
      d. 在reason中说明优化原因
 
-9. **【关键】Refer字段决定关系唯一性**:
+9. **【关键】Refer字段决定关系唯一性 & INCREMENT_COUNT操作**:
    - **关系唯一性判断**：source + target + description + **refer** 都相同才是同一关系
-   - **合并规则**：
-     - ✅ 相同关系（可合并，累加count）：
-       - "我 -> 某应用:可启动应用", description="打开应用", refer=[], count=1
-       - "我 -> 某应用:可启动应用", description="打开应用", refer=[], count=1
-       - → 合并为 count=2
-     - ❌ 不同关系（不可合并）：
-       - "我 -> 小明:可联系人", description="联系小明", refer=["问作业"]
-       - "我 -> 小明:可联系人", description="联系小明", refer=["微信:交流平台","分享视频"]
-       - → 保持为两条独立关系，因为 refer 不同（目的不同）
+   - **合并规则 - 使用increment_count操作**：
+     - ✅ 相同关系（应使用increment_count操作）：
+       - 现有关系: "我 -> 微信:可启动应用", description="打开了应用", refer=[], count=3
+       - 增量关系: "我 -> 微信:可启动应用", description="启动应用", refer=[], count=1
+       - → 输出: operation="increment_count", increment_amount=1, reason="与现有关系完全相同，累加count"
+       - → 结果: 现有关系的count从3变为4
+     - ✅ 批量相同关系（一次性累加多次）：
+       - 现有关系: "我 -> 淘宝:可启动应用", description="我打开应用", refer=[], count=5
+       - 增量关系: "我 -> 淘宝:可启动应用", description="打开淘宝", refer=[], count=3
+       - → 输出: operation="increment_count", increment_amount=3, reason="他们语义相同，与现有关系完全相同，累加count 3次"
+       - → 结果: 现有关系的count从5变为8
+     - ❌ 不同关系（不可合并，应使用add操作）：
+       - 现有关系: "我 -> 小明:可联系人", description="联系小明", refer=["问作业"], count=1
+       - 增量关系: "我 -> 小明:可联系人", description="联系小明", refer=["微信:交流平台","分享视频"], count=1
+       - → 输出: operation="add"（保持为两条独立关系，因为 refer 不同）
+   - **INCREMENT_COUNT 操作详细说明**：
+     - **何时使用**: 当增量关系与现有关系的 source、target、description、refer 完全相同时
+     - **increment_amount字段**: 表示要增加的次数（通常等于增量关系的count值）
+     - **典型场景**: 重复的原子操作（如多次打开同一应用、多次访问同一地点）
+     - **语义验证**: 必须确保两个关系在语义上完全相同，不仅是字面相同
+     - **输出要求**:
+       - operation: "increment_count"
+       - increment_amount: 要增加的次数（正整数）
+       - 保持原有的 source、target、description、refer 不变
+       - reason 中说明是与哪个现有关系匹配，以及累加的次数
    - **Refer字段处理**：
      - 输出时必须包含 "refer" 字段
      - 如果没有其他参与实体，使用空数组 []
      - Refer中的实体必须在现有图谱或增量中存在
      - 合并时比较 refer 数组内容（顺序无关，但内容必须完全一致）
+     - refer 不同则视为不同关系，不能使用 increment_count
 
 10. **【理解】原子关系 vs 复杂关系**:
     - **原子关系**: 单一直接动作，refer=[]
       - 示例: "我 -> 微信:可启动应用" (打开微信)
       - 示例: "视频:内容 -> 小明:可联系人" (分享视频给小明)
+      - **特点**: 最适合使用 increment_count 操作累加次数
     - **复杂关系**: 多方参与的事件，refer=[其他实体]
       - 示例: "微信:交流平台 -> 小明:可联系人", refer=["视频:内容"] (通过微信把视频分享给小明)
+      - **注意**: 即使source、target、description相同，只要refer不同就是不同关系，不能使用increment_count
     - **共存原则**: 原子关系和复杂关系应该共存，不是互相替换
     - **合并注意**: 不要将原子关系和复杂关系错误地合并在一起
 
-请开始分析并输出优化后的增量更新。
+10.5. **【重要】语义时间（semantic_times）处理规则**:
+    - **定义**: semantic_times记录关系所表示事件的发生时间（区别于系统的created_at/updated_at）
+    - **格式**: ISO 8601格式字符串列表，如 `["2026-01-10T10:30:00", "2026-01-10T15:00:00"]`
+    - **处理规则**:
+      - 时间列表可以为空（`[]`），表示没有具体时间信息
+      - 时间列表长度可以小于count（允许部分事件没有时间）
+      - 时间格式必须符合ISO 8601标准
+      - increment_count时，增量关系的semantic_times追加到现有关系的时间列表
+    - **示例**:
+      - 现有关系: semantic_times=`["2026-01-09T10:00:00", "2026-01-09T15:00:00"]`
+      - 增量关系: semantic_times=`["2026-01-10T08:30:00"]`
+      - increment_count后: 输出semantic_times=`["2026-01-10T08:30:00"]`（只包含新时间）
+      - 应用后效果: 现有关系的semantic_times变为`["2026-01-09T10:00:00", "2026-01-09T15:00:00", "2026-01-10T08:30:00"]`
+
+11. **【示例】INCREMENT_COUNT操作的正确使用**:
+    
+    **场景1: 简单原子操作累加（带语义时间）**
+    - 现有关系: {{"source": "我", "target": "高德地图:地图应用", "description": "打开高德地图", "refer": [], "count": 5, "semantic_times": ["2026-01-09T10:00:00", "2026-01-09T15:30:00"]}}
+    - 增量关系: {{"source": "我", "target": "高德地图:地图应用", "description": "我打开了高德地图", "refer": [], "count": 2, "semantic_times": ["2026-01-10T08:30:00"]}}
+    - 分析: source、target、description（语义上相同）、refer 完全相同，这是同一个原子操作重复2次，增量中有1个新时间
+    - **正确输出**:
+      ```json
+      {{
+        "source": "我",
+        "target": "高德地图:地图应用",
+        "description": "打开高德地图",
+        "refer": [],
+        "count": 5,
+        "semantic_times": ["2026-01-10T08:30:00"],
+        "operation": "increment_count",
+        "increment_amount": 2,
+        "reason": "与现有关系完全相同（source、target、description、refer均相同），累加count 2次（总count将从5变为7），并追加1个语义时间"
+      }}
+      ```
+    - **注意**: semantic_times中只包含增量关系的新时间，应用时会追加到现有关系的时间列表
+    
+    **场景2: 不能使用increment_count的情况**
+    - 现有关系: {{"source": "我", "target": "小明:可联系人", "description": "联系小明", "refer": ["问作业"], "count": 1, "semantic_times": ["2026-01-09T14:00:00"]}}
+    - 增量关系: {{"source": "我", "target": "小明:可联系人", "description": "联系小明", "refer": ["分享视频"], "count": 1, "semantic_times": ["2026-01-10T16:00:00"]}}
+    - 分析: source、target、description 相同，但 refer 不同（问作业 vs 分享视频），这是两次不同目的的联系
+    - **正确输出**:
+      ```json
+      {{
+        "source": "我",
+        "target": "小明:可联系人",
+        "description": "联系小明",
+        "refer": ["分享视频"],
+        "count": 1,
+        "semantic_times": ["2026-01-10T16:00:00"],
+        "operation": "add",
+        "increment_amount": 0,
+        "reason": "虽然source、target、description与现有关系相同，但refer不同，这是不同目的的联系，应作为新关系添加"
+      }}
+      ```
+    
+    **场景3: 完全相同但count为1的情况（无语义时间）**
+    - 现有关系: {{"source": "我", "target": "微信:可启动应用", "description": "打开微信", "refer": [], "count": 10, "semantic_times": []}}
+    - 增量关系: {{"source": "我", "target": "微信:可启动应用", "description": "打开了微信", "refer": [], "count": 1, "semantic_times": []}}
+    - 分析: 完全相同的原子操作，增量中只记录了1次，都没有时间信息
+    - **正确输出**:
+      ```json
+      {{
+        "source": "我",
+        "target": "微信:可启动应用",
+        "description": "打开微信",
+        "refer": [],
+        "count": 10,
+        "semantic_times": [],
+        "operation": "increment_count",
+        "increment_amount": 1,
+        "reason": "与现有关系完全相同，累加count 1次，总count将从10变为11"
+      }}
+      ```
+    - **注意**: semantic_times可以为空列表，表示没有具体时间信息
+
+## 【示例】如何使用提供的数据进行合并
+
+### 示例输入数据
+
+**Delta相关的现有数据（搜索结果）**:
+```json
+[
+  {{
+    "name": "美团外卖",
+    "description": "外卖订餐平台",
+    "classes": ["可启动应用"],
+    "properties": {{}},
+    "search_score": 0.95,
+    "matched_by": "美团外卖"
+  }},
+  {{
+    "name": "微信",
+    "description": "即时通讯应用",
+    "classes": ["可启动应用", "交流平台"],
+    "properties": {{}},
+    "search_score": 0.98,
+    "matched_by": "微信"
+  }}
+]
+```
+
+**待合并的Delta**:
+```json
+{{
+  "entities": [
+    {{"name": "美团外卖", "classes": ["可启动应用", "外卖服务"], "description": "提供外卖点餐服务的应用"}},
+    {{"name": "微信", "classes": ["可启动应用", "交流平台"], "description": "社交通讯平台"}},
+    {{"name": "张三餐厅", "classes": ["餐厅"], "description": "一家餐厅"}}
+  ],
+  "relationships": [
+    {{"source": "我", "target": "美团外卖:可启动应用", "description": "我打开美团外卖", "count": 1}}
+  ]
+}}
+```
+
+### 正确的分析流程
+
+1. **分析"美团外卖"**:
+   - 在Delta相关数据中找到"美团外卖"，search_score=0.95（很高）
+   - 名称完全相同，说明实体已存在
+   - 现有类:["可启动应用"]，Delta类:["可启动应用", "外卖服务"]
+   - **决策**: operation="update"，添加新类"外卖服务"，合并描述
+
+2. **分析"微信"**:
+   - 在Delta相关数据中找到"微信"，search_score=0.98（非常高）
+   - 名称完全相同，类完全相同
+   - **决策**: operation="skip"或"update"（优化描述）
+
+3. **分析"张三餐厅"**:
+   - 在Delta相关数据中未找到（如果搜索结果中没有）
+   - 在所有现有实体中检查，如果也没有
+   - **决策**: operation="add"，新实体
+
+### 错误示例（避免）
+
+❌ **错误1**: 不查看搜索结果，直接将已存在的实体标记为"add"
+```json
+{{"name": "美团外卖", "operation": "add"}}  // 错误！应该是update
+```
+
+❌ **错误2**: 忽略search_score，错误判断实体不存在
+```json
+// Delta相关数据中明明有search_score=0.95的"美团外卖"
+{{"name": "美团外卖", "operation": "add", "reason": "新实体"}}  // 错误！
+```
+
+❌ **错误3**: 没有利用matched_by信息
+```json
+// 没有注意到"美团外卖"的matched_by="美团外卖"，说明是同名匹配
+{{"name": "美团外卖", "operation": "add"}}  // 错误！
+```
+
+✅ **正确做法**:
+```json
+{{
+  "optimized_entities": [
+    {{
+      "name": "美团外卖",
+      "description": "提供外卖点餐服务的应用平台",
+      "classes": ["可启动应用", "外卖服务"],
+      "properties": {{}},
+      "operation": "update",
+      "merge_target": null,
+      "reason": "实体已存在（search_score=0.95），新增'外卖服务'类，优化描述"
+    }},
+    {{
+      "name": "微信",
+      "description": "社交通讯平台",
+      "classes": ["可启动应用", "交流平台"],
+      "properties": {{}},
+      "operation": "update",
+      "merge_target": null,
+      "reason": "实体已存在（search_score=0.98），类相同，优化描述"
+    }},
+    {{
+      "name": "张三餐厅",
+      "description": "一家餐厅",
+      "classes": ["餐厅"],
+      "properties": {{}},
+      "operation": "add",
+      "merge_target": null,
+      "reason": "新实体，在现有数据和搜索结果中均未找到"
+    }}
+  ]
+}}
+```
+
+## 开始任务
+
+请充分利用"所有现有实体详情"和"Delta相关的现有数据"，仔细分析待合并的增量更新，输出优化后的结果。

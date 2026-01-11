@@ -21,6 +21,7 @@ from ..models.delta import (
 )
 from ..llm.client import LLMClient
 from ..utils.logger import get_logger
+from ..search.search_engine import SearchResult
 
 logger = get_logger(__name__)
 
@@ -160,8 +161,12 @@ class SmartMerger:
         current_system_yaml = self._serialize_system(current_system)
         entity_count = current_graph.get_entity_count()
         relationship_count = current_graph.get_relationship_count()
-        existing_entities = list(current_graph._entities.keys())[:50]  # 最多50个
-        existing_entities_detail = self._get_entities_detail(current_graph, limit=20)
+
+        # 获取所有现有实体的详细信息（不包含关系）
+        existing_entities_full = self._get_all_entities_detail(current_graph)
+
+        # 为delta中的每个实体进行模糊搜索，获取相关的现有数据
+        delta_related_data = self._search_related_data_for_delta(current_graph, delta)
 
         # 准备增量更新信息
         delta_json = json.dumps(delta.to_dict(), ensure_ascii=False, indent=2)
@@ -171,7 +176,8 @@ class SmartMerger:
             "current_system_classes": list(current_system.get_all_classes()),
             "entity_count": entity_count,
             "relationship_count": relationship_count,
-            "existing_entities_sample": existing_entities,
+            "existing_entities_full": existing_entities_full,
+            "delta_related_data": delta_related_data,
             "delta_summary": delta.get_summary(),
             "delta_details": delta.to_dict(),
         }
@@ -184,8 +190,8 @@ class SmartMerger:
             current_system=current_system_yaml,
             entity_count=entity_count,
             relationship_count=relationship_count,
-            existing_entities=", ".join(existing_entities),
-            existing_entities_detail=existing_entities_detail,
+            existing_entities_full=existing_entities_full,
+            delta_related_data=delta_related_data,
             delta=delta_json,
         )
 
@@ -233,7 +239,7 @@ class SmartMerger:
         return yaml.dump(system_dict, allow_unicode=True, default_flow_style=False)
 
     def _get_entities_detail(self, graph: Graph, limit: int = 20) -> str:
-        """获取现有实体的详细信息（JSON格式）"""
+        """获取现有实体的详细信息（JSON格式）- 保留用于向后兼容"""
         entities_data = []
         for i, (name, entity) in enumerate(graph._entities.items()):
             if i >= limit:
@@ -248,6 +254,93 @@ class SmartMerger:
                 }
             )
         return json.dumps(entities_data, ensure_ascii=False, indent=2)
+
+    def _get_all_entities_detail(self, graph: Graph) -> str:
+        """获取所有现有实体的详细信息（不包含关系）"""
+        entities_data = []
+        for entity in graph.get_entities():
+            # 构建实体详情
+            entity_info = {
+                "name": entity.name,
+                "description": entity.description or "",
+                "classes": [c.class_name for c in entity.classes],
+                "properties": {},
+            }
+
+            # 添加属性信息
+            for class_instance in entity.classes:
+                class_props = {}
+                for prop_name, prop_value in class_instance.properties.items():
+                    class_props[prop_name] = prop_value.value or ""
+                if class_props:
+                    entity_info["properties"][class_instance.class_name] = class_props
+
+            entities_data.append(entity_info)
+
+        return json.dumps(entities_data, ensure_ascii=False, indent=2)
+
+    def _search_related_data_for_delta(self, graph: Graph, delta: GraphDelta) -> str:
+        """
+        为delta中的每个实体进行模糊搜索，获取相关的现有数据
+
+        对每个delta实体：
+        1. 使用实体名称进行模糊搜索
+        2. 收集搜索结果中的实体信息
+        3. 去重合并
+
+        Note: 使用Graph关联的搜索引擎，如果Graph没有search_engine属性，则临时创建一个
+        """
+        logger.debug(f"为{len(delta.entities)}个delta实体搜索相关数据...")
+
+        # 使用Graph关联的搜索引擎（如果有）
+        # 这样可以利用SimpleGraph初始化时创建的搜索引擎实例
+        if hasattr(graph, "_search_engine"):
+            search_engine = graph._search_engine
+        else:
+            # 如果Graph没有搜索引擎，临时创建一个（向后兼容）
+            from ..search.search_engine import SearchEngine
+
+            search_engine = SearchEngine(graph)
+            logger.debug("临时创建搜索引擎实例")
+
+        # 收集所有相关实体（去重）
+        related_data: List[SearchResult] = []
+
+        for entity_delta in delta.entities:
+            entity_name = entity_delta.name
+            logger.debug(f"搜索与'{entity_name}'相关的实体...")
+
+            # 模糊搜索
+            search_results: List[SearchResult] = search_engine.search_keyword(
+                keyword=entity_name,
+                fuzzy=True,
+                limit=20,  # 每个实体最多返回20个相关结果
+            )
+
+            # 提取实体信息
+            for result in search_results:
+                related_data.append(result)
+
+        # 对related_data进行去重
+        # 按result_type和matched_item的tuple进行去重，保留得分更高的项
+        dedup_dict = {}
+        for item in related_data:
+            key = (item.result_type, item.matched_item)
+            # 如果键不存在或当前项得分更高，则更新
+            if key not in dedup_dict or item.score > dedup_dict[key].score:
+                dedup_dict[key] = item
+
+        # 转换回列表并按得分排序
+        related_data_sorted = sorted(
+            dedup_dict.values(), key=lambda x: x.score, reverse=True
+        )
+
+        logger.info(f"为delta搜索到{len(related_data_sorted)}个相关实体（去重后）")
+
+        # 转换为字典列表以便JSON序列化
+        related_data_dicts = [item.to_dict() for item in related_data_sorted]
+
+        return json.dumps(related_data_dicts, ensure_ascii=False, indent=2)
 
     def _parse_llm_response(self, response: str) -> dict:
         """解析LLM返回的JSON响应"""
@@ -311,6 +404,27 @@ class SmartMerger:
         # 解析关系增量
         relationships = []
         for rel_data in optimized_data.get("optimized_relationships", []):
+            operation = rel_data.get("operation", "add")
+            increment_amount = rel_data.get("increment_amount", 0)
+
+            # 如果是increment_count操作，确保increment_amount有效
+            if operation == "increment_count" and increment_amount <= 0:
+                logger.warning(
+                    f"关系 {rel_data['source']} -> {rel_data['target']} "
+                    f"使用increment_count操作但increment_amount={increment_amount}无效，将使用add操作"
+                )
+                operation = "add"
+                increment_amount = 0
+
+            # 解析语义时间列表（可选，向后兼容）
+            semantic_times = rel_data.get("semantic_times", [])
+            if not isinstance(semantic_times, list):
+                logger.warning(
+                    f"关系 {rel_data['source']} -> {rel_data['target']} "
+                    f"的semantic_times不是列表类型，使用空列表"
+                )
+                semantic_times = []
+
             relationships.append(
                 RelationshipDelta(
                     source=rel_data["source"],
@@ -318,7 +432,9 @@ class SmartMerger:
                     description=rel_data["description"],
                     count=rel_data.get("count", 1),
                     refer=rel_data.get("refer", []),  # 添加 refer 字段支持
-                    operation=rel_data.get("operation", "add"),
+                    semantic_times=semantic_times,  # 添加 semantic_times 字段支持
+                    operation=operation,
+                    increment_amount=increment_amount,
                 )
             )
 

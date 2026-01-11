@@ -1,5 +1,5 @@
 [project]
-name = "personalui"
+name = "graphrag_simple"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -19,7 +19,3 @@ dependencies = [
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 default = true
 
-[tool.uv.workspace]
-members = [
-    "simple_graphrag",
-]

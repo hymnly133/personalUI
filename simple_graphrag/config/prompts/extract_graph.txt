@@ -1,481 +1,375 @@
--System Overview-
-This is a knowledge graph system with a hierarchical structure.
+# 📊 知识图谱实体关系提取系统
 
-**IMPORTANT**: See system_rules.txt for complete rules including:
-- Base architecture definition
-- Entity "我" rules
-- Class naming rules (avoid generic classes)
-- Action-based class rules
+> **系统类型**：层级结构知识图谱提取
 
-**1. Entity (中心节点)**
-   - The main entity nodes in the graph
-   - **MUST be SPECIFIC instances with unique identifiers, NOT generic categories**
-   - ✅ Examples: "小红书" (specific app), "微信" (specific app), "我" (the user), "Alice" (specific person), "张三的店" (specific restaurant)
-   - ❌ NOT entities: "餐厅" (generic), "应用" (generic), "朋友" (generic), "书" (generic) - these are CLASSES
-   - Each entity has:
-     - name: Entity identifier (must be unique and specific)
-     - description: What this entity is
-     - classes: List of classes this entity belongs to
+---
 
-**2. Class (类)**
-   - Categories that define what aspects an entity can have
-   - **CRITICAL RULES**:
-     - **MANDATORY "用户" CLASS**: The system MUST always include a "用户" class
-     - Action-based classes are PASSIVE: They describe what CAN BE DONE TO entities by "我"
-     - "可启动应用" = "可以被(我)启动的应用" (passive: applications that can be launched by 我)
-     - "可联系人" = "可以被(我)用来联系人的平台" (passive: platforms that can be used for contacting by 我)
-     - "购物平台" = "可以被(我)用来购物的平台" (relative to "我")
-     - All action-based classes implicitly assume "我" as the actor
-     - "我" entity MUST belong to "用户" class and MUST NOT belong to action-based classes
-   - Examples: "用户" (user - MANDATORY), "可启动应用" (applications that can be launched by 我), "可联系人" (platforms for contacting by 我), "购物平台" (shopping platforms used by 我), "信息流" (information feed platforms), "联系人" (contacts)
-   - An entity can belong to multiple classes (composition pattern)
-   - Each class can have multiple properties
+## 🎯 核心概念速览
 
-**3. Property (属性)**
-   - Attributes of a class that describe specific characteristics
-   - Examples: "微信号", "小红书号", "启动方式", "偏好"
-   - Properties have two dimensions:
-     - required: Whether the property itself is mandatory for the class
-     - value_required: Whether the property value must be provided
-   - Properties can be:
-     - Required + Value Required: Must exist and have a value
-     - Required + Value Optional: Must exist but value can be empty
-     - Optional + Value Required: If exists, must have a value
-     - Optional + Value Optional: Completely optional
+### 5个基础概念
 
-**4. Property Value (属性值)**
-   - The actual value of a property for a specific entity instance
-   - Examples: "hymnly" (for 微信号), "点击应用图标" (for 启动方式)
-   - Values are entity-specific and class-specific
+| 概念 | 定义 | 格式/示例 |
+|------|------|----------|
+| **Entity（实体）** | 具体实例，有唯一标识 | ✅ "小红书"、"微信"、"我"、"Alice"<br>❌ "餐厅"、"应用"（这是类） |
+| **Class（类）** | 实体所属类别 | "可启动应用"、"用户"、"购物平台" |
+| **Property（属性）** | 类的特征属性 | "微信号"、"启动方式"、"偏好" |
+| **Class Node（类节点）** | 实体特定方面 | "小红书:购物平台"、"微信:交流平台" |
+| **Relationship（关系）** | 节点间连接 | "我 → 微信:可启动应用" |
 
-**5. Class Node (类节点)**
-   - A specific aspect of an entity represented as an independent node
-   - Format: "entity_name:class_name"
-   - Examples: "小红书:购物平台", "小红书:可联系人", "微信:可联系人"
-   - Class nodes are automatically connected to their entity nodes
-   - Relationships can connect to:
-     - Entity nodes: For general relationships
-     - Class nodes: For class-specific relationships
+### ⚠️ 关键规则
 
-**6. Relationship (关系)**
-   - Connections between entities and/or class nodes
-   - **IMPORTANT: Extract "discovery" relationships as TRIANGLES**
-     - When text describes "finding/seeing/discovering WHAT from WHERE", extract THREE relationships:
-       1. User to platform: "我 -> 平台:内容平台"
-       2. User to discovered entity: "我 -> 具体实体"
-       3. Platform to discovered entity: "平台:内容平台 -> 具体实体"
-     - This triangle captures: WHO discovered WHAT through WHERE
-   - Rules:
-     - Use class node if relationship is specific to that class aspect
-     - Use entity node if relationship is general
-   - Examples:
-     - "我 -> 小红书:购物平台" (buying on Xiaohongshu)
-     - "我 -> Alice" (friendship, general)
-     - "我在抖音上看到张三的店" → Extract triangle: "我->抖音:内容平台" + "我->张三的店" + "抖音:内容平台->张三的店"
+1. **实体必须具体**：不提取泛指名词（"餐厅"、"应用"、"朋友"）
+2. **动作类是被动**："可启动应用" = 可被我启动的应用
+3. **"我"的类规则**："我" 必属 "用户" 类，禁止属于动作类
+4. **功能关系用类节点**：功能性关系优先用 `entity:class` 格式
+5. **发现关系成三角**：我→平台、我→实体、平台→实体
 
--Goal-
-Given a text document, extract entities, their classes/properties, and relationships in FOUR STEPS:
-- STEP 0: Check if existing class properties can represent all information in the text, suggest new properties if needed
-- STEP 1: Extract entities
-- STEP 2: Assign classes and properties to entities
-- STEP 3: Extract relationships
+---
 
--Important Concepts-
-1. **Entity (中心节点)**: A general entity node, such as "小红书", "微信", "我", "Alice"
-2. **Class (类)**: A category that an entity belongs to, such as "可启动应用", "可联系人", "购物平台"
-3. **Property (属性)**: Attributes of a class, such as "微信号", "小红书号", "启动方式"
-4. **Property Value (属性值)**: The actual value of a property, such as "hymnly" for "微信号"
-5. **Class Node (类节点)**: A specific aspect of an entity, formatted as "entity_name:class_name", such as "小红书:购物平台"
-6. **Relationship (关系)**: Connections between entities and/or class nodes
+## 📋 提取流程（4个强制步骤）
 
--Relationship Rules-
-- **Prefer entity:class** for functional relationships, plain entity for overall attitudes
-- Class nodes auto-connect to entities (no manual connection needed)
-- Include `refer` field for multi-party relationships (objects, tools, platforms involved)
+### STEP 0：属性需求检查
 
--STEP 0: Check Property Requirements-
-**CRITICAL: Always try to use existing properties first. Only suggest new properties when absolutely necessary.**
+> ⚠️ **核心原则**：优先使用现有属性，仅在绝对必要时建议新属性
 
-Review the input text and the available class properties. For each piece of information in the text:
-1. Try to match it with existing properties
-2. If no existing property can represent this information, suggest a new property
+**检查流程**：
+```
+文本信息 → 匹配现有属性 → 无法匹配 → 建议新属性
+```
 
-For each new property needed, provide:
-- class_name: Which class this property belongs to
-- property_name: Name of the new property
-- property_description: What this property represents
-- reason: Why existing properties cannot represent this information
+**输出格式**：
+```
+("new_property"{tuple_delimiter}<类名>{tuple_delimiter}<属性名>{tuple_delimiter}<属性描述>{tuple_delimiter}<原因>)
+```
 
-**Important Guidelines:**
-- **Prefer existing properties**: If an existing property can reasonably represent the information (even if not perfectly), use it
-- **Avoid redundant properties**: Don't suggest properties that are semantically similar to existing ones
-- **Be specific**: New properties should have clear, specific purposes
-- **Consider generality**: Properties should be reusable for other entities of the same class
-
-Format: ("new_property"{tuple_delimiter}<class_name>{tuple_delimiter}<property_name>{tuple_delimiter}<property_description>{tuple_delimiter}<reason>)
-
-**If no new properties are needed**, output:
+**无需新属性时**：
 ```
 NO_NEW_PROPERTIES
 ```
 
-**Example when new properties are needed:**
-Text: "我在抖音上刷到张三的店，他们的招牌是红烧肉套餐"
-Available properties for "餐厅": ["名称", "类型"]
+---
 
-STEP 0 - Property Requirements:
-("new_property"{tuple_delimiter}餐厅{tuple_delimiter}招牌菜品{tuple_delimiter}餐厅的特色或招牌菜品{tuple_delimiter}现有属性中"名称"表示餐厅名称，"类型"表示餐厅类别，都无法表达"招牌菜品"这一具体信息){record_delimiter}
+### STEP 1：提取实体
 
-**Example when existing properties are sufficient:**
-Text: "我在抖音上看到一家网红餐厅"
-Available properties for "餐厅": ["名称", "类型"]
+**输出格式**：
+```
+("entity"{tuple_delimiter}<实体名>{tuple_delimiter}<实体描述>)
+```
 
-STEP 0 - Property Requirements:
-NO_NEW_PROPERTIES
+#### 🚨 强制规则
 
--STEP 1: Extract Entities-
-Identify all entities mentioned in the text. For each entity, extract:
-- entity_name: Name of the entity
-- entity_description: Brief description of what this entity is
+| 规则 | 说明 |
+|------|------|
+| ✅ **必提"我"** | 文中出现"我"必须提取，描述为"用户本人" |
+| ✅ **具体实例** | 有唯一标识：人名、店名、应用名 |
+| ❌ **禁止通用** | 不提取"餐厅"、"应用"、"朋友"等类别名 |
+| ❌ **禁止UI元素或页面** | 不提取界面元素：按钮、文本框、标签、图标等 |
 
-**CRITICAL REQUIREMENTS:**
-1. **Entities MUST be SPECIFIC instances, NOT generic categories**
-   - ✅ CORRECT: "张三的店" (specific restaurant), "抖音" (specific app), "Alice" (specific person)
-   - ❌ WRONG: "餐厅" (generic category), "应用" (generic category), "朋友" (generic category)
-   - Generic categories should be used as CLASSES, not entities
-   - If the text only mentions a generic concept without a specific name, DO NOT extract it as an entity
+#### 🎯 实体命名规则（确保唯一性）
 
-2. **"我" entity is mandatory**
-   - If the text contains "我" (I/me), you MUST extract "我" as an entity with description "用户本人"
-   - "我" is a critical entity and MUST NOT be skipped or ignored
-   - Even if "我" appears only in relationships or actions, it must be extracted as a separate entity
+> **核心原则**：名称必须可唯一识别，避免歧义
 
-3. **Extract named entities with unique identifiers**
-   - Names of people, places, apps, products, stores, etc.
-   - Avoid extracting generic nouns like "书" (book), "衣服" (clothes), "餐厅" (restaurant)
-   - If a generic noun has a specific name (e.g., "《三体》", "张三的店"), extract it
+**❌ 错误示例**
 
-4. **【关键】实体命名必须具有辨识性和唯一性 (Entity Names MUST be Distinctive and Unique)**
-   
-   **核心原则**: 实体名称必须能够唯一标识该实体，避免使用过于通用的名称。
-   
-   **错误示例** ❌:
-   - "招牌套餐" - 太通用，任何餐厅都可能有招牌套餐
-   - "套餐" - 极度通用，无法识别具体指哪个套餐
-   - "商品" - 通用类别名称，不是具体实体
-   - "菜品" - 通用名称，没有辨识性
-   
-   **正确示例** ✅:
-   - "张三的店的招牌套餐" - 明确指定是张三的店的招牌套餐
-   - "美团外卖的优惠券" - 明确指定是美团外卖的优惠券
-   - "抖音的推荐算法" - 明确指定是抖音的推荐算法
-   - "Alice的生日礼物" - 明确指定是Alice的礼物
-   
-   **命名规则**:
-   a) **使用所有者/来源前缀**: 将实体与其来源或所有者关联
-      - 格式: "<所有者/来源>的<实体>"
-      - 示例: "张三的店的招牌套餐", "小红书的推荐内容", "微信的聊天记录"
-   
-   b) **使用具体描述性名称**: 如果实体有具体名称，使用它
-      - ✅ "红烧肉套餐" (有具体名称)
-      - ✅ "iPhone 15" (有具体型号)
-      - ❌ "手机" (通用名称)
-   
-   c) **保持上下文信息**: 确保实体名称包含足够的上下文
-      - ✅ "张三的店的会员卡" - 包含商家信息
-      - ❌ "会员卡" - 缺少上下文，无法识别是哪家店的
-   
-   **特殊处理**:
-   - 如果文本提到"他们家的招牌套餐"，且前文明确提到"张三的店"，则提取为"张三的店的招牌套餐"
-   - 如果文本只说"买了一个套餐"且无法确定来源，则不应提取为实体（太通用）
-   - 如果文本说"订了美团外卖的套餐"，则提取为"美团外卖的套餐"（有平台信息）
-   
-   **强关联实体之间的连接**:
-   - 当提取具有强关联的实体时（如"张三的店"和"张三的店的招牌套餐"）
-   - 必须在 STEP 3 中建立它们之间的关系
-   - 示例: "张三的店:商家" -> "张三的店的招牌套餐:商品"
-   - 关系描述: "张三的店提供招牌套餐" 或 "招牌套餐属于张三的店"
+| 错误实体名 | 问题 | 正确做法 |
+|-----------|------|---------|
+| "招牌套餐" | 哪家店的？ | "张三的店的招牌套餐" |
+| "优惠券" | 哪个平台的？ | "美团外卖的新用户优惠券" |
+| "套餐" | 太通用 | "美团外卖的双人套餐" |
+| "聊天记录" | 谁和谁的？ | "我和小明2024年1月10日的聊天记录" |
+| "视频" | 什么内容？ | "关于AI绘图教程的视频" |
+| "按钮" | UI元素或页面，禁止提取 | ❌ 不提取 |
+| "搜索框" | UI元素或页面，禁止提取 | ❌ 不提取 |
+| "图标" | UI元素或页面，禁止提取 | ❌ 不提取 |
 
-Format: ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_description>)
+**✅ 命名策略**
 
--STEP 2: Assign Classes and Properties-
-For each entity identified in Step 1, determine:
-1. Which classes from the list [{entity_types}] this entity belongs to
-2. For each class, what properties it has and their values (if mentioned in the text)
+1. **有具体名称**："iPhone 15"、"《三体》"、"星巴克"
+2. **无具体名称**：`<所有者/来源>的<实体>`，如"张三的店的招牌套餐"
+3. **前文指代**：推导补全，"他们家的套餐" → "张三的店的套餐"
 
-**CRITICAL REQUIREMENT FOR "我" ENTITY:**
-- If the entity is "我" and the class list contains "用户", you MUST assign "我" to "用户" class
-- "我" MUST NOT be assigned to action-based classes (e.g., "可启动应用", "可联系人", "购物平台") because "我" is the actor, not the object
-- Action-based classes describe entities that are ACTED UPON by "我", not entities that perform actions
-- If "我" has no suitable class in the list, still include "我" as an entity (it can have no classes, but the entity itself must exist)
-- Remember: "可启动应用" means "applications that CAN BE launched (by 我)", so "我" cannot belong to this class
+⚠️ 提取"X的Y"时，STEP 3必须建立"X → X的Y"关系
 
-Important notes:
-- An entity can belong to multiple classes
-- Only include properties that are mentioned in the text or can be inferred
-- If a property value is not mentioned (e.g., "微信号未知"), do not include that property
-- If a property value is mentioned (e.g., "微信号为hymnly"), include it with the value
-- **"我" entity is mandatory if present in the text - do not skip it even if no suitable class exists**
+#### 🚫 UI界面元素排除规则
 
-Format: ("class_property"{tuple_delimiter}<entity_name>{tuple_delimiter}<class_name>{tuple_delimiter}<property_name>{tuple_delimiter}<property_value>)
-- If an entity belongs to a class but has no properties mentioned, use: ("class_property"{tuple_delimiter}<entity_name>{tuple_delimiter}<class_name>{tuple_delimiter}NONE{tuple_delimiter}NONE)
-- If a property has no value mentioned, omit that property line
+> UI元素或页面是界面组件，不是知识实体。提取操作内容而非UI控件本身。
 
--STEP 3: Extract Relationships-
+**禁止提取**：按钮、输入框、标签、图标、对话框、菜单、面板等所有UI控件或页面
 
-**【关键要求】关系提取的详尽性原则**:
-- ✅ **提取出的关系必须尽可能详尽，不要漏掉任何一个二元关系**
-- ✅ **不要遗漏含第三方参与的二元关系**（即使用 refer 字段的关系）
-- ✅ **每个文本中提到的动作或连接都应该被提取为关系**
-- ✅ **宁可多提取也不要遗漏**，尤其是那些看似次要但能完整表达事件的关系
-- ❌ 避免仅提取"主要关系"而忽略"辅助关系"的错误
-
-**三阶段关系提取策略 (Three-Phase Strategy)**:
-
-### Phase 1: 提取所有原子关系 (Extract ALL Atomic Relationships)
-
-**原子关系** = 单一、直接的动作或连接，描述两个节点之间的最基本关系。
-
-**必须提取的原子关系类型**:
-1. **用户操作**: 我 -> 实体:类 (我打开、我看到、我联系)
-2. **内容传递**: 内容:类 -> 目标:类 (视频分享给某人)
-3. **平台关系**: 平台:类 -> 实体:类 (平台展示内容、平台连接用户)
-4. **发现关系**: 用户 -> 内容, 平台 -> 内容 (用户发现、平台呈现)
-
-**原子关系提取原则**:
-- ✅ **尽可能多地提取**: 每个单一动作都应该有对应的原子关系
-- ✅ **不使用 refer**: 原子关系的 refer 字段应为 NONE
-- ✅ **使用 entity:class**: 优先使用功能性类节点
-
-### Phase 2: 识别复杂事件 (Identify Complex Events)
-
-**复杂事件** = 涉及 >2 个实体的事件，仅靠原子关系无法完整表达。
-
-**判断标准**: 
-- 事件涉及"WHO did WHAT to WHOM through WHERE/WHAT"
-- 需要同时表达主体、客体、工具/媒介、内容等多方参与
-
-**示例**:
-- "我在微信上把视频分享给小明" ← 复杂事件（我、小明、微信、视频）
-- "我打开微信" ← 原子关系（我、微信）
-
-### Phase 3: 为复杂事件另起关系 (Create Separate Relationships for Complex Events)
-
-**重要**: 这是**额外增加**的关系，不是替换原子关系！
-
-**另起关系的规则**:
-1. **选择核心连接**: 选择事件中最核心的两个参与者作为 source 和 target
-2. **补充 refer**: 将其他参与实体放入 refer 字段
-3. **描述完整语义**: 关系描述应该反映完整的复杂事件
-4. **"我"不需要在 refer 中**: "我"总是隐含存在于用户的事件中
-
-**另起关系的模式**:
-- **模式A**: 工具/平台 -> 目标, refer=[内容] 
-  - 例: "微信:交流平台 -> 小明:可联系人", refer=["视频:内容"]
-- **模式B**: 内容 -> 目标, refer=[工具/平台]
-  - 例: "视频:内容 -> 小明:可联系人", refer=["微信:交流平台"]
+**处理示例**：
+- "点击微信图标" → 提取"微信"（应用），不提取"图标"
+- "在对话框看到小明的消息" → 提取"小明发给我的消息"，不提取"对话框"
+- "点击搜索按钮" → 不提取任何实体，仅建立动作关系
 
 ---
 
-**完整示例**: "我在小红书上看到一个关于AI绘图的视频，然后用微信分享给了小明"
+### STEP 2：分配类与属性
 
-**Phase 1 - 原子关系**:
-1. ("relationship"|我|小红书:可启动应用|我打开小红书|1|NONE)
-2. ("relationship"|我|小红书:内容平台|我在小红书上浏览内容|1|NONE)
-3. ("relationship"|我|一个关于AI绘图的视频:内容|我看到了这个视频|1|NONE)
-4. ("relationship"|小红书:内容平台|一个关于AI绘图的视频:内容|小红书展示了这个视频|1|NONE)
-5. ("relationship"|我|微信:可启动应用|我打开微信|1|NONE)
-6. ("relationship"|我|小明:可联系人|我联系了小明|1|NONE)
-7. ("relationship"|一个关于AI绘图的视频:内容|小明:可联系人|我把视频分享给小明|1|NONE)
-8. ("relationship"|微信:交流平台|小明:可联系人|我在微信上联系小明|1|NONE)
+**输出格式**：
+```
+有属性：("class_property"{tuple_delimiter}<实体名>{tuple_delimiter}<类名>{tuple_delimiter}<属性名>{tuple_delimiter}<属性值>)
+无属性：("class_property"{tuple_delimiter}<实体名>{tuple_delimiter}<类名>{tuple_delimiter}NONE{tuple_delimiter}NONE)
+```
 
-**Phase 3 - 复杂事件的另起关系** (额外增加):
-9. ("relationship"|微信:交流平台|小明:可联系人|我通过微信把视频分享给小明|1|一个关于AI绘图的视频:内容)
-10. ("relationship"|一个关于AI绘图的视频:内容|小明:可联系人|我在微信上把视频分享给小明|1|微信:交流平台)
+#### ⚠️ 强制规则
 
-**Phase 2 - 发现三角**: 小红书上发现视频，已在Phase 1中提取（关系2,3,4）
+**1. "我" 的类分配规则**
+
+| ✅ 必须 | ❌ 禁止 |
+|---------|---------|
+| 分配到 "用户" 类 | 分配到 "可启动应用" |
+| "我" 是执行者 | 分配到 "可联系人" |
+|  | 分配到任何动作类 |
+
+> **原因**：动作类是被动的（被我操作的对象），"我"是执行者不是对象
+
+**2. 通用规则**
+
+- ✅ 实体可属于多个类（组合模式）
+- ✅ 仅提取文中明确的属性值
+- ❌ 未提及的属性不要提取
 
 ---
 
-**CRITICAL RULES**:
+### STEP 3：提取关系
 
-**RULE 1 - 原子关系优先，复合关系另起**:
-- 先提取所有原子关系（refer=NONE）
-- 再为复杂事件另起关系（使用 refer）
-- 两者共存，不是替换关系
+**输出格式**：
+```
+("relationship"{tuple_delimiter}<源节点>{tuple_delimiter}<目标节点>{tuple_delimiter}<关系描述>{tuple_delimiter}<关系次数>{tuple_delimiter}<refer列表>{tuple_delimiter}<语义时间>)
+```
 
-**RULE 2 - Actions vs Objects**:
-- **Actions/Verbs** → RELATIONSHIPS: "购买"、"浏览"、"联系"、"打开"、"发现"、"分享"
-- **Objects/Nouns** → ENTITIES: "视频"、"书籍"、"商品"、"文章"
+**refer 格式**：
+- 原子关系：`NONE`
+- 复杂关系：`实体1:类1,实体2:类2`（逗号分隔，无空格）
 
-**RULE 3 - No Class Master Node Connections**:
-- Connect to specific entities/entity:class, NEVER to generic class master nodes
-- ✅ "我 -> 小红书:购物平台" ❌ "我 -> 购物平台"
+**语义时间格式**：
+- 【重要】只识别语料中出现的绝对时间，不处理相对时间
+- 识别文本中的绝对时间表达式（如"2026年1月10日"、"1月10日上午10点"、"2026-01-10"、"10:30"等）
+- 不处理相对时间（如"今天"、"昨天"、"明天"、"刚才"等）- 遇到相对时间使用 `NONE`
+- 转换为ISO 8601格式：`2026-01-10T10:30:00`
+- 如果只有日期没有时间，使用 `00:00:00`（如"1月10日" → "2026-01-10T00:00:00"）
+- 如果没有明确时间信息或是相对时间，使用 `NONE`
 
-**RULE 4 - 优先使用 Entity:Class 节点**:
-- **Default**: Use entity:class for functional relationships
-- **Exception**: Use plain entity for overall attitudes
-- **Never**: Generic class master nodes
+**语义时间示例**：
+- "2026年1月10日上午10:30" → `2026-01-10T10:30:00`
+- "1月10日" → `2026-01-10T00:00:00`
+- "上午10:30" → `NONE（没有日期）`
+- "昨天" → `NONE`（相对时间，不处理）
+- "刚才" → `NONE`（相对时间，不处理）
+- 无时间信息 → `NONE`
 
-**RULE 5 - "我" 不在 refer 中**:
-- "我" 作为用户本人总是隐含存在于事件中
-- 其他实体在 refer 中标注即可
+---
 
-**RULE 6 - 【关键】强关联实体必须建立连接 (Strongly Related Entities MUST be Connected)**:
+#### 🎯 核心策略：三阶段提取法
 
-当提取的实体之间存在强关联（如所属关系、包含关系）时，必须建立它们之间的关系。
+```mermaid
+Phase 1: 提取原子关系 (refer=NONE)
+    ↓
+Phase 2: 识别复杂事件 (>2个实体)
+    ↓
+Phase 3: 另起复杂关系 (使用refer，增量不替换)
+```
 
-**强关联类型**:
-a) **所属关系**: 某物属于某实体
-   - 示例: "张三的店的招牌套餐" 属于 "张三的店"
-   - 必须提取: "张三的店:商家" -> "张三的店的招牌套餐:商品"
-   - 关系描述: "张三的店提供招牌套餐" 或 "招牌套餐属于张三的店"
+> ⚠️ **关键**：Phase 3 是增量，不替换 Phase 1！
 
-b) **产出关系**: 某实体产出某物
-   - 示例: "抖音的推荐算法" 来自 "抖音"
-   - 必须提取: "抖音:内容平台" -> "抖音的推荐算法:算法"
-   - 关系描述: "抖音使用该推荐算法" 或 "推荐算法属于抖音"
+---
 
-c) **包含关系**: 某实体包含某物
-   - 示例: "小红书的优惠活动" 在 "小红书"
-   - 必须提取: "小红书:购物平台" -> "小红书的优惠活动:营销活动"
-   - 关系描述: "小红书举办该优惠活动" 或 "优惠活动在小红书上"
+#### 🔒 6大强制规则
 
-**检查清单** ✓:
-1. ✅ 如果提取了"X的Y"形式的实体，必须检查是否也提取了"X"实体
-2. ✅ 如果两者都存在，必须建立"X -> X的Y"的关系
-3. ✅ 关系应使用适当的类节点（如"X:商家 -> X的Y:商品"）
-4. ✅ 关系描述应清晰表达所属、产出或包含语义
+**规则1：原子关系详尽**（每个动作必提，宁多勿漏）
 
-**完整示例**:
+| 关系类型 | 格式 | 示例 |
+|---------|------|------|
+| 用户操作 | 我 → 实体:类 | 我 → 微信:可启动应用 |
+| 内容传递 | 内容:类 → 目标:类 | 视频:内容 → 小明:可联系人 |
+| 平台关系 | 平台:类 → 实体:类 | 抖音:内容平台 → 商品:商品 |
+| 发现三角 | 3条关系 | 我→平台、我→内容、平台→内容 |
 
-文本: "我在抖音上刷到一家网红餐厅，名叫"张三的店"，于是打开美团外卖订了他们家的招牌套餐。"
+**规则2：动作 vs 对象**
 
-实体提取:
-- "我" (用户本人)
-- "抖音" (视频平台)
-- "张三的店" (餐厅)
-- "张三的店的招牌套餐" (具体商品，注意不是"招牌套餐")
-- "美团外卖" (外卖平台)
+| 类型 | 用途 | 示例 |
+|------|------|------|
+| 动作（动词） | 提取为关系 | "购买"、"浏览"、"打开"、"分享" |
+| 对象（名词） | 提取为实体 | "视频"、"书籍"、"商品" |
 
-必须包含的强关联关系:
-- ("relationship"|张三的店:商家|张三的店的招牌套餐:商品|张三的店提供招牌套餐|1|NONE)
-- 或: ("relationship"|张三的店的招牌套餐:商品|张三的店:商家|招牌套餐属于张三的店|1|NONE)
+**规则3：禁用类主节点**
 
-**错误示例** ❌:
-- 只提取"招牌套餐"实体，但不建立与"张三的店"的关系
-- 提取通用名称"招牌套餐"而不是具体的"张三的店的招牌套餐"
-- 建立与"张三的店"的关系，但实体名称是通用的"招牌套餐"
+| ❌ 错误 | ✅ 正确 |
+|---------|---------|
+| 我 → 购物平台 | 我 → 小红书:购物平台 |
+| 我 → 应用 | 我 → 微信:可启动应用 |
 
-**正确示例** ✅:
-- 提取"张三的店的招牌套餐"作为实体（具体且有辨识性）
-- 建立"张三的店:商家" -> "张三的店的招牌套餐:商品"关系
-- 关系描述清晰表达所属关系
+> 必须连接具体实体/类节点，禁止连接通用类
 
-Format: ("relationship"{tuple_delimiter}<source_node>{tuple_delimiter}<target_node>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_count>{tuple_delimiter}<refer_list>)
+**规则4：优先 entity:class**
 
-**Refer Field**:
-- Comma-separated, NO spaces: "entity1:class1,entity2:class2"
-- Use "NONE" if no other participants
-- Must exist in entity list (STEP 1 & 2)
-- "我" should NOT appear in refer field
+- **功能性关系** → 使用 `entity:class` 格式
+- **态度性关系** → 使用 `entity` 格式
 
--Output Format-
-**CRITICAL**: Return output in {language} as EXACTLY FOUR SEPARATE SECTIONS (all steps are MANDATORY):
-1. STEP 0 output: Property requirements check (MUST output "NO_NEW_PROPERTIES" if no new properties needed)
-2. STEP 1 output: All entities
-3. STEP 2 output: All class-property assignments
-4. STEP 3 output: All relationships
+```
+✅ 我 → 高德地图:地图应用（功能：使用导航）
+✅ 我 → 高德地图（态度：我喜欢这个应用）
+```
 
-**IMPORTANT**: Always include STEP 0, even if it's just "NO_NEW_PROPERTIES"
+**规则5："我"不入 refer**
 
-Use **{record_delimiter}** as the delimiter between records within each section.
-Use **SECTION_DELIMITER** as the delimiter between the four sections.
+- "我" 作为用户总是隐含存在于事件中
+- refer 字段不需要标注"我"
 
--Example Output Format-
+**规则6：强关联必连接**
 
-**Example 1: 三阶段策略完整示例**
-Text: "我通过微信把一个关于AI绘图的视频分享给小明"
+提取"X的Y"形式实体时，必须建立 X→Y 关系：
 
-STEP 0 - Property Requirements:
+| 关联类型 | 格式 | 示例 |
+|---------|------|------|
+| 所属关系 | X:商家 → X的Y:商品 | 张三的店:商家 → 张三的店的招牌套餐:商品 |
+| 产出关系 | X:平台 → X的Y:算法 | 抖音:平台 → 抖音的推荐算法:算法 |
+| 包含关系 | X:平台 → X的Y:活动 | 小红书:平台 → 小红书的优惠活动:活动 |
+
+---
+
+---
+
+## 📤 输出格式规范
+
+### 结构要求
+
+```
+STEP 0 输出
+SECTION_DELIMITER
+STEP 1 输出
+SECTION_DELIMITER
+STEP 2 输出
+SECTION_DELIMITER
+STEP 3 输出
+{completion_delimiter}
+```
+
+### 分隔符说明
+
+| 分隔符 | 用途 |
+|--------|------|
+| `{record_delimiter}` | 记录间分隔 |
+| `SECTION_DELIMITER` | 章节间分隔 |
+| `{completion_delimiter}` | 完成标记 |
+
+**输出语言**：{language}
+
+---
+
+## 📚 完整示例
+
+### 示例1：复杂事件 - 三阶段完整提取
+
+**文本**：我通过微信把一个关于AI绘图的视频分享给小明
+
+**输出**：
+
+```
+STEP 0:
 NO_NEW_PROPERTIES
 SECTION_DELIMITER
-STEP 1 - Entities:
+
+STEP 1:
 ("entity"{tuple_delimiter}我{tuple_delimiter}用户本人){record_delimiter}
-("entity"{tuple_delimiter}微信{tuple_delimiter}一个即时通讯应用){record_delimiter}
-("entity"{tuple_delimiter}小明{tuple_delimiter}一个具体的人){record_delimiter}
-("entity"{tuple_delimiter}关于AI绘图的视频{tuple_delimiter}一个视频内容){record_delimiter}
+("entity"{tuple_delimiter}微信{tuple_delimiter}即时通讯应用){record_delimiter}
+("entity"{tuple_delimiter}小明{tuple_delimiter}具体的人){record_delimiter}
+("entity"{tuple_delimiter}关于AI绘图的视频{tuple_delimiter}视频内容){record_delimiter}
 SECTION_DELIMITER
-STEP 2 - Classes and Properties:
+
+STEP 2:
 ("class_property"{tuple_delimiter}我{tuple_delimiter}用户{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}微信{tuple_delimiter}交流平台{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}微信{tuple_delimiter}可启动应用{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}小明{tuple_delimiter}可联系人{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}关于AI绘图的视频{tuple_delimiter}内容{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 SECTION_DELIMITER
-STEP 3 - Relationships:
-# Phase 1: 原子关系（所有基本动作）
-("relationship"{tuple_delimiter}我{tuple_delimiter}微信:可启动应用{tuple_delimiter}我打开微信{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}小明:可联系人{tuple_delimiter}我联系了小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我把视频分享给小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上联系小明{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-# Phase 3: 复杂事件的另起关系（使用 refer）
-("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我通过微信把视频分享给小明{tuple_delimiter}1{tuple_delimiter}关于AI绘图的视频:内容){record_delimiter}
-("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上把视频分享给小明{tuple_delimiter}1{tuple_delimiter}微信:交流平台){record_delimiter}
+
+STEP 3:
+# Phase 1 原子关系
+("relationship"{tuple_delimiter}我{tuple_delimiter}微信:可启动应用{tuple_delimiter}我打开微信{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}小明:可联系人{tuple_delimiter}我联系了小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我把视频分享给小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上联系小明{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+# Phase 3 复杂事件关系
+("relationship"{tuple_delimiter}微信:交流平台{tuple_delimiter}小明:可联系人{tuple_delimiter}我通过微信把视频分享给小明{tuple_delimiter}1{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}关于AI绘图的视频:内容{tuple_delimiter}小明:可联系人{tuple_delimiter}我在微信上把视频分享给小明{tuple_delimiter}1{tuple_delimiter}微信:交流平台{tuple_delimiter}NONE){record_delimiter}
 {completion_delimiter}
+```
 
-**Key points:**
-- ✅ Phase 1: 4个原子关系（打开微信、联系小明、分享视频、微信联系）
-- ✅ Phase 3: 2个复杂事件关系（带 refer）
-- ✅ 原子关系和复杂关系共存，不是替换
-- ✅ "我" 不出现在 refer 字段中
+**关键点**：4原子 + 2复杂 = 6关系，两阶段共存
 
-**Example 2: 发现三角模式**
-Text: "我在抖音上刷到张三的店"
+---
 
-STEP 0 - Property Requirements:
+### 示例2：发现三角模式
+
+**文本**：我在抖音上刷到张三的店
+
+**输出**：
+
+```
+STEP 0:
 NO_NEW_PROPERTIES
 SECTION_DELIMITER
-STEP 1 - Entities:
+
+STEP 1:
 ("entity"{tuple_delimiter}我{tuple_delimiter}用户本人){record_delimiter}
 ("entity"{tuple_delimiter}抖音{tuple_delimiter}短视频平台){record_delimiter}
-("entity"{tuple_delimiter}张三的店{tuple_delimiter}一家餐厅){record_delimiter}
+("entity"{tuple_delimiter}张三的店{tuple_delimiter}餐厅){record_delimiter}
 SECTION_DELIMITER
-STEP 2 - Classes and Properties:
+
+STEP 2:
 ("class_property"{tuple_delimiter}我{tuple_delimiter}用户{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}抖音{tuple_delimiter}可启动应用{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}抖音{tuple_delimiter}内容平台{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 ("class_property"{tuple_delimiter}张三的店{tuple_delimiter}餐厅{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 SECTION_DELIMITER
-STEP 3 - Relationships:
-# Phase 1: 原子关系（发现三角）
-("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:可启动应用{tuple_delimiter}我打开抖音{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:内容平台{tuple_delimiter}我在抖音上浏览内容{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}我{tuple_delimiter}张三的店:餐厅{tuple_delimiter}我发现了张三的店{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
-("relationship"{tuple_delimiter}抖音:内容平台{tuple_delimiter}张三的店:餐厅{tuple_delimiter}张三的店在抖音上被展示{tuple_delimiter}1{tuple_delimiter}NONE){record_delimiter}
+
+STEP 3:
+("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:可启动应用{tuple_delimiter}我打开抖音{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}抖音:内容平台{tuple_delimiter}我在抖音上浏览内容{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}我{tuple_delimiter}张三的店:餐厅{tuple_delimiter}我发现了张三的店{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
+("relationship"{tuple_delimiter}抖音:内容平台{tuple_delimiter}张三的店:餐厅{tuple_delimiter}张三的店在抖音上被展示{tuple_delimiter}1{tuple_delimiter}NONE{tuple_delimiter}NONE){record_delimiter}
 {completion_delimiter}
+```
 
-**Key points:**
-- ✅ Phase 1: 发现三角（我->抖音, 我->张三的店, 抖音->张三的店）
-- ✅ 加上"打开抖音"原子关系
-- ✅ 此例只有原子关系，无复杂事件，所以无 Phase 3
-- ✅ 所有原子关系的 refer=NONE
+**关键点**：发现三角4关系（打开 + 浏览 + 发现 + 展示）
 
-######################
--Real Data-
-######################
-Classes: {entity_types}
-Available Classes and Properties:
+---
+
+## 🚀 真实数据提取任务
+
+### 可用类列表
+```
+{entity_types}
+```
+
+### 类与属性详情
+```
 {classes_info}
+```
 
-**Base Entities (基础实体)**:
+### 基础实体（预定义）
+```
 {base_entities_info}
+```
 
-**IMPORTANT**: 
-- If "我" is mentioned, it MUST be extracted and assigned to "用户" class
-- If any base entity is mentioned, use its pre-defined classes
-- Base entities are always available and can be referenced in relationships
+### ⚠️ 重要提醒
 
-Text: {input_text}
-######################
-Output:
+- ✅ "我"必须提取并分配到"用户"类
+- ✅ 基础实体使用预定义类
+- ✅ 基础实体可直接用于关系
+
+---
+
+## 📝 待提取文本
+
+```
+{input_text}
+```
+
+---
+
+## 📤 开始输出
+
+请按照上述格式和规则，输出完整的4步骤提取结果：
