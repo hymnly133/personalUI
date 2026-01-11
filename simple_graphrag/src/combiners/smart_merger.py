@@ -292,17 +292,6 @@ class SmartMerger:
         """
         logger.debug(f"为{len(delta.entities)}个delta实体搜索相关数据...")
 
-        # 使用Graph关联的搜索引擎（如果有）
-        # 这样可以利用SimpleGraph初始化时创建的搜索引擎实例
-        if hasattr(graph, "_search_engine"):
-            search_engine = graph._search_engine
-        else:
-            # 如果Graph没有搜索引擎，临时创建一个（向后兼容）
-            from ..search.search_engine import SearchEngine
-
-            search_engine = SearchEngine(graph)
-            logger.debug("临时创建搜索引擎实例")
-
         # 收集所有相关实体（去重）
         related_data: List[SearchResult] = []
 
@@ -311,7 +300,7 @@ class SmartMerger:
             logger.debug(f"搜索与'{entity_name}'相关的实体...")
 
             # 模糊搜索
-            search_results: List[SearchResult] = search_engine.search_keyword(
+            search_results: List[SearchResult] = graph._search_engine.search_keyword(
                 keyword=entity_name,
                 fuzzy=True,
                 limit=20,  # 每个实体最多返回20个相关结果

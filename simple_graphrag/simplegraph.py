@@ -149,8 +149,7 @@ class SimpleGraph:
         self.combiner = Combiner(self.graph, strict_validation=False)
 
         # 初始化搜索引擎并关联到Graph
-        self.search_engine = SearchEngine(self.graph)
-        self.graph._search_engine = self.search_engine  # 让Graph持有引用
+        self.search_engine = self.graph._search_engine
         logger.info("搜索引擎初始化完成")
 
         # 并发控制
